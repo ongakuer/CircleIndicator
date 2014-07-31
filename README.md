@@ -2,6 +2,8 @@ CircleIndicator
 ===============
 a lightweight viewpager indicator like in nexus 5 launcher 
 
+![CircleIndicator](/screenshot.png)
+
 
 Usage
 --------
@@ -13,11 +15,11 @@ Usage
 
 #####Properties:
 
-*`app:ci_width`
-*`app:ci_height`
-*`app:ci_margin`
-*`app:ci_animator`
-*`app:ci_drawable`
+* `app:ci_width`
+* `app:ci_height`
+* `app:ci_margin`
+* `app:ci_animator`
+* `app:ci_drawable`
 
 
 
