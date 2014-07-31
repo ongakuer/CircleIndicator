@@ -4,13 +4,7 @@ a lightweight viewpager indicator like in nexus 5 launcher
 
 ![CircleIndicator](/screenshot.png)
 
-Dependencies
-------------
-```groovy
-dependencies {
-        compile 'com.nineoldandroids:library:2.4.+'
-}
-```
+
 
 Usage
 --------
@@ -28,5 +22,12 @@ Usage
 * `app:ci_animator`
 * `app:ci_drawable`
 
+Dependencies
+------------
+```groovy
+dependencies {
+        compile 'com.nineoldandroids:library:2.4.+'
+}
+```
 
 
