@@ -16,4 +16,13 @@
         android:valueFrom="5"
         android:valueTo="0"/>
 
+
+    <objectAnimator
+        android:propertyName="rotation"
+        android:duration="@android:integer/config_shortAnimTime"
+        android:valueType="floatType"
+        android:valueFrom="0"
+        android:valueTo="180"/>
+
+
 </set>

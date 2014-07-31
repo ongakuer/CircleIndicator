@@ -26,6 +26,8 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     private int mIndicatorWidth;
 
+    private int mIndicatorHeight;
+
     private int mAnimatorResId = R.animator.scale_with_alpha;
 
     private int mIndicatorBackground = R.drawable.white_radius;
@@ -48,9 +50,7 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
     private void init(Context context, AttributeSet attrs) {
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER);
-
         handleTypedArray(context, attrs);
-
         mAnimationOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, mAnimatorResId);
         mAnimationOut.setInterpolator(new LinearInterpolator());
         mAnimationIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, mAnimatorResId);
@@ -63,6 +63,8 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
                     context.obtainStyledAttributes(attrs, R.styleable.CircleIndicator);
             mIndicatorWidth =
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_width, -1);
+            mIndicatorHeight =
+                    typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_height, -1);
             mIndicatorMargin =
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_margin, -1);
             mAnimatorResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator,
@@ -72,10 +74,12 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
             typedArray.recycle();
         }
 
-        mIndicatorMargin =
-                (mIndicatorMargin == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorMargin;
         mIndicatorWidth =
                 (mIndicatorWidth == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorWidth;
+        mIndicatorHeight =
+                (mIndicatorHeight == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorHeight;
+        mIndicatorMargin =
+                (mIndicatorMargin == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorMargin;
     }
 
     public void setViewPager(ViewPager viewPager) {
@@ -132,7 +136,7 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         for (int i = 0; i < count; i++) {
             View Indicator = new View(getContext());
             Indicator.setBackgroundResource(mIndicatorBackground);
-            addView(Indicator, mIndicatorWidth, mIndicatorWidth);
+            addView(Indicator, mIndicatorWidth, mIndicatorHeight);
             LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();
             lp.leftMargin = mIndicatorMargin;
             lp.rightMargin = mIndicatorMargin;
@@ -148,8 +152,8 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     private class ReverseInterpolator implements Interpolator {
         @Override
-        public float getInterpolation(float input) {
-            return Math.abs(input - 1.0f);
+        public float getInterpolation(float value) {
+            return Math.abs(1.0f - value);
         }
     }
 

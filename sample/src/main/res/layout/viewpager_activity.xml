@@ -35,10 +35,11 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_custom"
-            app:ci_width="6dp"
+            app:ci_width="10dp"
+            app:ci_height="4dp"
             app:ci_margin="6dp"
             app:ci_animator="@animator/indicator_translation_and_alpha"
-            app:ci_drawable="@drawable/black_radius"
+            app:ci_drawable="@drawable/balck_radius_square"
             android:layout_centerInParent="true"
             android:layout_width="fill_parent"
             android:layout_height="40dp"/>
