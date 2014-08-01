@@ -20,6 +20,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.android.support:appcompat-v7:20.+'
     compile project(':library')
+    //compile 'com.nineoldandroids:library:2.4.+'
+    //compile 'me.relex:circleindicator:1.0.0+@aar'
 }
