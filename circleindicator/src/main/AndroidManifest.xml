@@ -1,11 +1,5 @@
 <manifest
     package="me.relex.circleindicator">
 
-    <!--<application android:allowBackup="true"-->
-    <!--android:label="@string/app_name"-->
-    <!--android:icon="@drawable/ic_launcher"-->
-    <!--android:theme="@style/AppTheme">-->
-
-    <!--</application>-->
 
 </manifest>
