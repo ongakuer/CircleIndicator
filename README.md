@@ -2,7 +2,7 @@ CircleIndicator
 ===============
 a lightweight viewpager indicator like in nexus 5 launcher 
 
-![CircleIndicator](/screenshot.png)
+![CircleIndicator](/screenshot.gif)
 
 
 
