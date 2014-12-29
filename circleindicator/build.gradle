@@ -20,68 +20,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21+'
-    //compile 'com.nineoldandroids:library:2.4.+'
+    compile 'com.android.support:support-v4:21.0.3'
 }
 
 
 apply from: "upload.gradle"
-////////////////////////////
-//apply plugin: 'maven'
-//apply plugin: 'signing'
-//
-//version = "1.1.0"
-//group = "me.relex"
-//
-//configurations {
-//    archives {
-//        extendsFrom configurations.default
-//    }
-//}
-//
-//uploadArchives {
-//    configuration = configurations.archives
-//    repositories.mavenDeployer {
-//
-//        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//        repository(url: sonatypeRepo) {
-//            authentication(userName: sonatypeUsername,
-//                    password: sonatypePassword)
-//        }
-//
-//        pom.project {
-//            name 'CircleIndicator'
-//            packaging 'aar'
-//            description 'a lightweight viewpager indicator like in nexus 5 launcher'
-//            url 'https://github.com/ongakuer/CircleIndicator'
-//
-//            scm {
-//                url 'scm:git@github.com:ongakuer/CircleIndicator.git'
-//                connection 'scm:git@github.com:ongakuer/CircleIndicator.git'
-//                developerConnection 'scm:git@github.com:ongakuer/CircleIndicator.git'
-//            }
-//
-//            licenses {
-//                license {
-//                    name 'The Apache Software License, Version 2.0'
-//                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    distribution 'repo'
-//                }
-//            }
-//
-//            developers {
-//                developer {
-//                    id 'relex'
-//                    name 'relex'
-//                    email 'wwwliangxin@gmail.com'
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//signing {
-//    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
-//    sign configurations.archives
-//}
