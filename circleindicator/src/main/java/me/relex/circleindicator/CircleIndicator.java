@@ -1,7 +1,7 @@
 package me.relex.circleindicator;
 
+import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -17,25 +16,17 @@ import static android.support.v4.view.ViewPager.OnPageChangeListener;
 public class CircleIndicator extends LinearLayout implements OnPageChangeListener {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
-
     private ViewPager mViewpager;
-
     private OnPageChangeListener mViewPagerOnPageChangeListener;
-
     private int mIndicatorMargin;
-
     private int mIndicatorWidth;
-
     private int mIndicatorHeight;
-
     private int mAnimatorResId = R.animator.scale_with_alpha;
-
+    private int mAnimatorReverseResId = -1;
     private int mIndicatorBackground = R.drawable.white_radius;
-
     private int mCurrentPosition = 0;
-
-    private AnimatorSet mAnimationOut;
-    private AnimatorSet mAnimationIn;
+    private Animator mAnimationOut;
+    private Animator mAnimationIn;
 
     public CircleIndicator(Context context) {
         super(context);
@@ -51,10 +42,13 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER);
         handleTypedArray(context, attrs);
-        mAnimationOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, mAnimatorResId);
-        mAnimationOut.setInterpolator(new LinearInterpolator());
-        mAnimationIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, mAnimatorResId);
-        mAnimationIn.setInterpolator(new ReverseInterpolator());
+        mAnimationOut = AnimatorInflater.loadAnimator(context, mAnimatorResId);
+        if (mAnimatorReverseResId == -1) {
+            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
+            mAnimationIn.setInterpolator(new ReverseInterpolator());
+        } else {
+            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
+        }
     }
 
     private void handleTypedArray(Context context, AttributeSet attrs) {
@@ -67,13 +61,15 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_height, -1);
             mIndicatorMargin =
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_margin, -1);
+
             mAnimatorResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator,
                     R.animator.scale_with_alpha);
+            mAnimatorReverseResId =
+                    typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, -1);
             mIndicatorBackground = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
                     R.drawable.white_radius);
             typedArray.recycle();
         }
-
         mIndicatorWidth =
                 (mIndicatorWidth == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorWidth;
         mIndicatorHeight =
@@ -89,11 +85,9 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
     }
 
     public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
-
         if (mViewpager == null) {
             throw new NullPointerException("can not find Viewpager , setViewPager first");
         }
-
         mViewPagerOnPageChangeListener = onPageChangeListener;
         mViewpager.setOnPageChangeListener(this);
     }
@@ -141,7 +135,6 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
             lp.leftMargin = mIndicatorMargin;
             lp.rightMargin = mIndicatorMargin;
             Indicator.setLayoutParams(lp);
-
             mAnimationOut.setTarget(Indicator);
             mAnimationOut.start();
         }

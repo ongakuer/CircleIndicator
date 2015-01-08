@@ -6,6 +6,7 @@
         <attr name="ci_height" format="dimension"/>
         <attr name="ci_margin" format="dimension"/>
         <attr name="ci_animator" format="reference"/>
+        <attr name="ci_animator_reverse" format="reference"/>
         <attr name="ci_drawable" format="reference"/>
     </declare-styleable>
 </resources>
