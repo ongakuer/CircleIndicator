@@ -7,10 +7,10 @@ a lightweight viewpager indicator like in nexus 5 launcher
 Gradle
 ------------
 
-**version 1.1.0 (```minSdkVersion="14"```)**
+**version 1.1.1 (```minSdkVersion="14"```)**
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.0@aar'
+    compile 'me.relex:circleindicator:1.1.1@aar'
 }
 ```
 
@@ -36,8 +36,9 @@ Usage
 * `app:ci_width`
 * `app:ci_height`
 * `app:ci_margin`
-* `app:ci_animator`
 * `app:ci_drawable`
+* `app:ci_animator`
+* `app:ci_animator_reverse`
 
 
 License
