@@ -1,32 +1,31 @@
 package me.relex.circleindicator;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
 public class CircleIndicator extends LinearLayout implements OnPageChangeListener {
 
-    private final static int DEFAULT_INDICATOR_WIDTH = 5;
+    private final static int DEFAULT_INDICATOR_WIDTH = 8;
+
+    private int mTransitionDuration = 300;
+
     private ViewPager mViewpager;
     private OnPageChangeListener mViewPagerOnPageChangeListener;
     private int mIndicatorMargin;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
-    private int mAnimatorResId = R.animator.scale_with_alpha;
-    private int mAnimatorReverseResId = -1;
-    private int mIndicatorBackground = R.drawable.white_radius;
     private int mCurrentPosition = 0;
-    private Animator mAnimationOut;
-    private Animator mAnimationIn;
+
+    private int mTransitionDrawableResId = R.drawable.transition_color;
 
     public CircleIndicator(Context context) {
         super(context);
@@ -42,13 +41,6 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER);
         handleTypedArray(context, attrs);
-        mAnimationOut = AnimatorInflater.loadAnimator(context, mAnimatorResId);
-        if (mAnimatorReverseResId == -1) {
-            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
-            mAnimationIn.setInterpolator(new ReverseInterpolator());
-        } else {
-            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
-        }
     }
 
     private void handleTypedArray(Context context, AttributeSet attrs) {
@@ -61,15 +53,11 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_height, -1);
             mIndicatorMargin =
                     typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_margin, -1);
-
-            mAnimatorResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator,
-                    R.animator.scale_with_alpha);
-            mAnimatorReverseResId =
-                    typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, -1);
-            mIndicatorBackground = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
-                    R.drawable.white_radius);
-            typedArray.recycle();
+            mTransitionDrawableResId =
+                    typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
+                            R.drawable.transition_color);
         }
+
         mIndicatorWidth =
                 (mIndicatorWidth == -1) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorWidth;
         mIndicatorHeight =
@@ -105,11 +93,10 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
             mViewPagerOnPageChangeListener.onPageSelected(position);
         }
 
-        mAnimationIn.setTarget(getChildAt(mCurrentPosition));
-        mAnimationIn.start();
-
-        mAnimationOut.setTarget(getChildAt(position));
-        mAnimationOut.start();
+        ((TransitionDrawable) getChildAt(mCurrentPosition).getBackground()).reverseTransition(
+                mTransitionDuration);
+        ((TransitionDrawable) getChildAt(position).getBackground()).startTransition(
+                mTransitionDuration);
 
         mCurrentPosition = position;
     }
@@ -129,25 +116,27 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
         for (int i = 0; i < count; i++) {
             View Indicator = new View(getContext());
-            Indicator.setBackgroundResource(mIndicatorBackground);
+
+            Drawable backgroundDrawable = getResources().getDrawable(mTransitionDrawableResId);
+            if (!(backgroundDrawable instanceof TransitionDrawable)) {
+                backgroundDrawable = getResources().getDrawable(R.drawable.transition_color);
+            }
+
+            //((TransitionDrawable) backgroundDrawable).setCrossFadeEnabled(true);
+
+            Indicator.setBackgroundDrawable(backgroundDrawable);
             addView(Indicator, mIndicatorWidth, mIndicatorHeight);
             LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();
             lp.leftMargin = mIndicatorMargin;
             lp.rightMargin = mIndicatorMargin;
             Indicator.setLayoutParams(lp);
-            mAnimationOut.setTarget(Indicator);
-            mAnimationOut.start();
         }
 
-        mAnimationOut.setTarget(getChildAt(mCurrentPosition));
-        mAnimationOut.start();
+        ((TransitionDrawable) getChildAt(mCurrentPosition).getBackground()).startTransition(0);
     }
 
-    private class ReverseInterpolator implements Interpolator {
-        @Override
-        public float getInterpolation(float value) {
-            return Math.abs(1.0f - value);
-        }
+    public void setTransitionDuration(int transitionDuration) {
+        this.mTransitionDuration = transitionDuration;
     }
 
     public int dip2px(float dpValue) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,29 +22,29 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1">-->
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager_custom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    <!--<android.support.v4.view.ViewPager-->
+    <!--android:id="@+id/viewpager_custom"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicator_custom"
-            app:ci_width="10dp"
-            app:ci_height="4dp"
-            app:ci_margin="6dp"
-            app:ci_animator="@animator/indicator_animator"
-            app:ci_animator_reverse="@animator/indicator_animator_reverse"
-            app:ci_drawable="@drawable/black_radius_square"
-            android:layout_centerInParent="true"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
+    <!--<me.relex.circleindicator.CircleIndicator-->
+    <!--android:id="@+id/indicator_custom"-->
+    <!--app:ci_width="10dp"-->
+    <!--app:ci_height="4dp"-->
+    <!--app:ci_margin="6dp"-->
+    <!--app:ci_animator="@animator/indicator_animator"-->
+    <!--app:ci_animator_reverse="@animator/indicator_animator_reverse"-->
+    <!--app:ci_drawable="@drawable/black_radius_square"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="40dp"/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
 </LinearLayout>

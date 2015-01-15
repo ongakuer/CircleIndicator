@@ -16,7 +16,8 @@ public class DemoPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override public Fragment getItem(int i) {
-        return ColorFragment.newInstance(0xff000000 | random.nextInt(0x00ffffff));
+        //return ColorFragment.newInstance(0xff000000 | random.nextInt(0x00ffffff));
+        return ColorFragment.newInstance(0xffffffff);
     }
 
     @Override public int getCount() {
