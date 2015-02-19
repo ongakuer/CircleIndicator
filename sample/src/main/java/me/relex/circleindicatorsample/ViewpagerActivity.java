@@ -19,6 +19,13 @@ public class ViewpagerActivity extends ActionBarActivity {
         defaultViewpager.setAdapter(defaultPagerAdapter);
         defaultIndicator.setViewPager(defaultViewpager);
 
+        // UNSELECTED BACKGROUND
+        ViewPager unselectedBackgroundViewPager = (ViewPager) findViewById(R.id.viewpager_unselected_background);
+        CircleIndicator unselectedBackgroundIndicator = (CircleIndicator) findViewById(R.id.indicator_unselected_background);
+        DemoPagerAdapter unselectedBackgroundPagerAdapter = new DemoPagerAdapter(getSupportFragmentManager());
+        unselectedBackgroundViewPager.setAdapter(unselectedBackgroundPagerAdapter);
+        unselectedBackgroundIndicator.setViewPager(unselectedBackgroundViewPager);
+
         // CUSTOM
         ViewPager customViewpager = (ViewPager) findViewById(R.id.viewpager_custom);
         CircleIndicator customIndicator = (CircleIndicator) findViewById(R.id.indicator_custom);
