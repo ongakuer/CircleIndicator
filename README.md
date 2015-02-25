@@ -37,6 +37,7 @@ Usage
 * `app:ci_height`
 * `app:ci_margin`
 * `app:ci_drawable`
+* `app:ci_drawable_unselected`
 * `app:ci_animator`
 * `app:ci_animator_reverse`
 
