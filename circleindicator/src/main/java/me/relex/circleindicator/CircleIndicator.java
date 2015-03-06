@@ -84,8 +84,10 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     public void setViewPager(ViewPager viewPager) {
         mViewpager = viewPager;
+        mCurrentPosition = mViewpager.getCurrentItem();
         createIndicators(viewPager);
         mViewpager.setOnPageChangeListener(this);
+        onPageSelected(mCurrentPosition);
     }
 
     public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
@@ -108,6 +110,9 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         if (mViewPagerOnPageChangeListener != null) {
             mViewPagerOnPageChangeListener.onPageSelected(position);
         }
+
+        if (mAnimationIn.isRunning()) mAnimationIn.cancel();
+        if (mAnimationOut.isRunning()) mAnimationOut.cancel();
 
         View currentIndicator = getChildAt(mCurrentPosition);
         currentIndicator.setBackgroundResource(mIndicatorUnselectedBackground);
