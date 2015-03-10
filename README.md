@@ -58,7 +58,7 @@ ChangeLog
 * Remove NineOldAndroids dependency
 * ```minSdkVersion="14"```
 
-## 1.0.0  (2014-08-01)
+##### 1.0.0  (2014-08-01)
 * Initial release. (```minSdkVersion="8"```)
 
 
