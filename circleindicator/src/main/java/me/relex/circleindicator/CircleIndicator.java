@@ -70,8 +70,9 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
                     typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, -1);
             mIndicatorBackground = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
                     R.drawable.white_radius);
-            mIndicatorUnselectedBackground = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
-                    mIndicatorBackground);
+            mIndicatorUnselectedBackground =
+                    typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
+                            mIndicatorBackground);
             typedArray.recycle();
         }
         mIndicatorWidth =
