@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:duration="@android:integer/config_longAnimTime"
+        android:propertyName="alpha"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:valueFrom="0.1"
+        android:valueTo="1.0"
+        android:valueType="floatType"/>
+
+</set>

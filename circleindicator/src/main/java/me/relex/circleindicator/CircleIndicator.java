@@ -2,6 +2,7 @@ package me.relex.circleindicator;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.DrawableRes;
@@ -24,11 +25,14 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
     private int mIndicatorHeight;
     private int mAnimatorResId = R.animator.scale_with_alpha;
     private int mAnimatorReverseResId = -1;
+    private int mAnimatorCurrentResId = -1;
     private int mIndicatorBackground = R.drawable.white_radius;
     private int mIndicatorUnselectedBackground = R.drawable.white_radius;
     private int mCurrentPosition = 0;
     private Animator mAnimationOut;
     private Animator mAnimationIn;
+    private Animator mAnimationCurrent;
+    AnimatorSet mAnimatorSet;
 
     public CircleIndicator(Context context) {
         super(context);
@@ -44,13 +48,20 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER);
         handleTypedArray(context, attrs);
+
+        mAnimatorSet = new AnimatorSet();
+        mAnimationCurrent = AnimatorInflater.loadAnimator(context, mAnimatorCurrentResId);
         mAnimationOut = AnimatorInflater.loadAnimator(context, mAnimatorResId);
+
         if (mAnimatorReverseResId == -1) {
             mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
             mAnimationIn.setInterpolator(new ReverseInterpolator());
         } else {
             mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
         }
+
+        mAnimatorSet.playTogether(mAnimationOut, mAnimationCurrent);
+
     }
 
     private void handleTypedArray(Context context, AttributeSet attrs) {
@@ -68,6 +79,9 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
                     R.animator.scale_with_alpha);
             mAnimatorReverseResId =
                     typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, -1);
+            mAnimatorCurrentResId =
+                    typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_current, R.animator.indicator_no_animator);
+
             mIndicatorBackground = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
                     R.drawable.white_radius);
             mIndicatorUnselectedBackground =
@@ -113,17 +127,20 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         }
 
         if (mAnimationIn.isRunning()) mAnimationIn.cancel();
-        if (mAnimationOut.isRunning()) mAnimationOut.cancel();
+        if(mAnimatorSet.isRunning()) mAnimatorSet.end();
 
         View currentIndicator = getChildAt(mCurrentPosition);
         currentIndicator.setBackgroundResource(mIndicatorUnselectedBackground);
         mAnimationIn.setTarget(currentIndicator);
         mAnimationIn.start();
 
-        View selectedIndicaotr = getChildAt(position);
-        selectedIndicaotr.setBackgroundResource(mIndicatorBackground);
-        mAnimationOut.setTarget(selectedIndicaotr);
-        mAnimationOut.start();
+        View selectedIndicator = getChildAt(position);
+        selectedIndicator.setBackgroundResource(mIndicatorBackground);
+
+        mAnimationOut.setTarget(selectedIndicator);
+        mAnimationCurrent.setTarget(selectedIndicator);
+
+        mAnimatorSet.start();
 
         mCurrentPosition = position;
     }
