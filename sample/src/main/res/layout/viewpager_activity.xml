@@ -67,6 +67,7 @@
             app:ci_animator="@animator/indicator_no_animator"
             app:ci_drawable="@drawable/white_radius"
             app:ci_drawable_unselected="@drawable/black_radius"
+            app:ci_animator_current="@animator/blinking_animator"
             android:layout_height="40dp"
             />
     </RelativeLayout>

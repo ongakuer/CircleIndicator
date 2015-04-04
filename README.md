@@ -40,8 +40,7 @@ Usage
 * `app:ci_drawable_unselected`
 * `app:ci_animator`
 * `app:ci_animator_reverse`
-
-
+* `app:ci_animator_current`
 
 ChangeLog
 --------
