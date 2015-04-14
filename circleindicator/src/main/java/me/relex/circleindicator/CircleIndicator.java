@@ -99,8 +99,8 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         mViewpager.setOnPageChangeListener(this);
     }
 
-    @Override public void onPageScrolled(int position, float positionOffset,
-            int positionOffsetPixels) {
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (mViewPagerOnPageChangeListener != null) {
             mViewPagerOnPageChangeListener.onPageScrolled(position, positionOffset,
                     positionOffsetPixels);
@@ -112,17 +112,17 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
             mViewPagerOnPageChangeListener.onPageSelected(position);
         }
 
-        if (mAnimationIn.isRunning()) mAnimationIn.cancel();
-        if (mAnimationOut.isRunning()) mAnimationOut.cancel();
+        if (mAnimationIn.isRunning()) mAnimationIn.end();
+        if (mAnimationOut.isRunning()) mAnimationOut.end();
 
         View currentIndicator = getChildAt(mCurrentPosition);
         currentIndicator.setBackgroundResource(mIndicatorUnselectedBackground);
         mAnimationIn.setTarget(currentIndicator);
         mAnimationIn.start();
 
-        View selectedIndicaotr = getChildAt(position);
-        selectedIndicaotr.setBackgroundResource(mIndicatorBackground);
-        mAnimationOut.setTarget(selectedIndicaotr);
+        View selectedIndicator = getChildAt(position);
+        selectedIndicator.setBackgroundResource(mIndicatorBackground);
+        mAnimationOut.setTarget(selectedIndicator);
         mAnimationOut.start();
 
         mCurrentPosition = position;
@@ -140,18 +140,15 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         if (count <= 0) {
             return;
         }
-
-        addIndicator(mIndicatorBackground);
-
+        addIndicator(mIndicatorBackground, mAnimationOut);
         for (int i = 1; i < count; i++) {
-            addIndicator(mIndicatorUnselectedBackground);
+            addIndicator(mIndicatorUnselectedBackground, mAnimationIn);
         }
-
-        mAnimationOut.setTarget(getChildAt(mCurrentPosition));
-        mAnimationOut.start();
     }
 
-    private void addIndicator(@DrawableRes int backgroundDrawableId) {
+    private void addIndicator(@DrawableRes int backgroundDrawableId, Animator animator) {
+        if (animator.isRunning()) animator.end();
+
         View Indicator = new View(getContext());
         Indicator.setBackgroundResource(backgroundDrawableId);
         addView(Indicator, mIndicatorWidth, mIndicatorHeight);
@@ -159,13 +156,13 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         lp.leftMargin = mIndicatorMargin;
         lp.rightMargin = mIndicatorMargin;
         Indicator.setLayoutParams(lp);
-        mAnimationOut.setTarget(Indicator);
-        mAnimationOut.start();
+
+        animator.setTarget(Indicator);
+        animator.start();
     }
 
     private class ReverseInterpolator implements Interpolator {
-        @Override
-        public float getInterpolation(float value) {
+        @Override public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
         }
     }
