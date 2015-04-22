@@ -47,7 +47,7 @@ ChangeLog
 --------
 
 ##### 1.1.3  (2015-04-15)
-* Fix bug ([#9](https://github.com/ongakuer/CircleIndicator/issues/12))
+* Fix bug ([#12](https://github.com/ongakuer/CircleIndicator/issues/12))
 
 ##### 1.1.2  (2015-03-10)
 * Fix bug ([#9](https://github.com/ongakuer/CircleIndicator/pull/9))
