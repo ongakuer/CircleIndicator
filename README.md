@@ -7,21 +7,13 @@ a lightweight viewpager indicator like in nexus 5 launcher
 Gradle
 ------------
 
-**version 1.1.3 (```minSdkVersion="14"```)**
+**version 1.1.4 (```minSdkVersion="11"```)**
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.3@aar'
+    compile 'me.relex:circleindicator:1.1.4@aar'
 }
 ```
 
-
-**version 1.0.0 (```minSdkVersion="8"```)**
-```groovy
-dependencies {
-    compile 'com.nineoldandroids:library:2.4.+'
-    compile 'me.relex:circleindicator:1.0.0@aar'
-}
-```
 
 Usage
 --------
@@ -45,6 +37,11 @@ Usage
 
 ChangeLog
 --------
+
+##### 1.1.4  (2015-06-03)
+* Fix bug ([#17](https://github.com/ongakuer/CircleIndicator/issues/17))
+* SetOnPageChangeListener is deprecated (Please use ViewPager addOnPageChangeListener)
+* ```minSdkVersion="11"```
 
 ##### 1.1.3  (2015-04-15)
 * Fix bug ([#12](https://github.com/ongakuer/CircleIndicator/issues/12))
