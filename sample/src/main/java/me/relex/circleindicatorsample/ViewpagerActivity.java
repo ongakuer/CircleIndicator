@@ -2,11 +2,11 @@ package me.relex.circleindicatorsample;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ViewpagerActivity extends ActionBarActivity {
+public class ViewpagerActivity extends AppCompatActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class ViewpagerActivity extends ActionBarActivity {
         DemoPagerAdapter customPagerAdapter = new DemoPagerAdapter(getSupportFragmentManager());
         customViewpager.setAdapter(customPagerAdapter);
         customIndicator.setViewPager(customViewpager);
-        customIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        customViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override public void onPageScrolled(int i, float v, int i2) {
 
             }
