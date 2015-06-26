@@ -146,6 +146,10 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     @Override public void onPageSelected(int position) {
 
+        if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
+            return;
+        }
+
         if (mAnimationIn.isRunning()) mAnimationIn.end();
         if (mAnimationOut.isRunning()) mAnimationOut.end();
 
@@ -167,6 +171,10 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     private void createIndicators(ViewPager viewPager) {
         removeAllViews();
+        if (viewPager.getAdapter() == null) {
+            return;
+        }
+
         int count = viewPager.getAdapter().getCount();
         if (count <= 0) {
             return;
