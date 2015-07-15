@@ -43,7 +43,7 @@ ChangeLog
 
 ##### 1.1.4  (2015-06-03)
 * Fix bug ([#17](https://github.com/ongakuer/CircleIndicator/issues/17))
-* SetOnPageChangeListener is deprecated (Please use ViewPager addOnPageChangeListener)
+* SetOnPageChangeListener is deprecated, Please use ViewPager addOnPageChangeListener (v4 support lirbray revision 22.2.0)
 * ```minSdkVersion="11"```
 
 ##### 1.1.3  (2015-04-15)
