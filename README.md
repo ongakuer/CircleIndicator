@@ -32,11 +32,16 @@ Usage
 * `app:ci_drawable_unselected`
 * `app:ci_animator`
 * `app:ci_animator_reverse`
+* `app:ci_animator_insert`
+* `app:ci_animator_remove`
 
 
 
 ChangeLog
 --------
+
+##### 1.1.6  (2015-09-02)
+* support insertion and deletion
 
 ##### 1.1.5  (2015-06-28)
 * Fix bug ([#22](https://github.com/ongakuer/CircleIndicator/issues/22))

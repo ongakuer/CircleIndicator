@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/black"
+              android:orientation="vertical">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -17,13 +18,37 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_default"
-            android:layout_centerInParent="true"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
-    </RelativeLayout>
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/viewpager_default_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_add"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/viewpager_default_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_remove"
+            android:textColor="@android:color/white"/>
+
+    </FrameLayout>
 
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -35,20 +60,44 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_custom"
-            app:ci_width="10dp"
-            app:ci_height="4dp"
-            app:ci_margin="6dp"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             app:ci_animator="@animator/indicator_animator"
+            app:ci_animator_insert="@animator/indicator_insert"
+            app:ci_animator_remove="@animator/indicator_remove"
             app:ci_animator_reverse="@animator/indicator_animator_reverse"
             app:ci_drawable="@drawable/black_radius_square"
-            android:layout_centerInParent="true"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
+            app:ci_height="4dp"
+            app:ci_margin="6dp"
+            app:ci_width="10dp"/>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/viewpager_custom_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_add"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/viewpager_custom_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_remove"
+            android:textColor="@android:color/white"/>
+
+    </FrameLayout>
 
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -60,16 +109,40 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_unselected_background"
-            android:layout_centerInParent="true"
             android:layout_width="fill_parent"
-            app:ci_width="6dp"
-            app:ci_height="6dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             app:ci_animator="@animator/indicator_no_animator"
+            app:ci_animator_insert="@animator/indicator_no_animator"
+            app:ci_animator_remove="@animator/indicator_no_animator"
             app:ci_drawable="@drawable/white_radius"
             app:ci_drawable_unselected="@drawable/black_radius"
-            android:layout_height="40dp"
+            app:ci_height="6dp"
+            app:ci_width="6dp"
             />
-    </RelativeLayout>
 
+        <TextView
+            android:id="@+id/viewpager_unselected_background_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_add"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/viewpager_unselected_background_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/dynamic_view_pager_remove"
+            android:textColor="@android:color/white"/>
+
+    </FrameLayout>
 
 </LinearLayout>
