@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">CircleIndicator</string>
+    <string name="dynamic_view_pager_add">Add</string>
+    <string name="dynamic_view_pager_remove">Remove</string>
 
 </resources>

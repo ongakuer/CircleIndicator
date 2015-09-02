@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
-version = "1.1.5"
+version = "1.1.6"
 
 android {
     compileSdkVersion 22
@@ -9,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 22
-        versionCode 115
+        versionCode 116
         versionName version
     }
 
@@ -22,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:support-v4:22.2.1'
 }
 
 
