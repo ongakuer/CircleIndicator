@@ -122,11 +122,11 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     public void setViewPager(ViewPager viewPager) {
         mViewpager = viewPager;
-        mCurrentPosition = mViewpager.getCurrentItem();
+        //mCurrentPosition = mViewpager.getCurrentItem();
         createIndicators(viewPager);
         mViewpager.removeOnPageChangeListener(this);
         mViewpager.addOnPageChangeListener(this);
-        onPageSelected(mCurrentPosition);
+        onPageSelected(mViewpager.getCurrentItem());
     }
 
     /**
