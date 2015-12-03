@@ -9,7 +9,6 @@ import android.support.annotation.AnimatorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -182,13 +181,6 @@ public class CircleIndicator extends LinearLayout {
             } else {
                 mLastPosition = -1;
             }
-
-            Log.e("DataSetObserver", "mInternalDataSetObserver onChanged mLastPosition ="
-                    + mLastPosition
-                    + "; newCount = "
-                    + newCount
-                    + "; currentCount = "
-                    + currentCount);
 
             createIndicators();
         }
