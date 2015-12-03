@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.database.DataSetObserver;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -15,7 +17,7 @@ import android.widget.LinearLayout;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
-public class CircleIndicator extends LinearLayout implements OnPageChangeListener {
+public class CircleIndicator extends LinearLayout {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
     private ViewPager mViewpager;
@@ -26,9 +28,10 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
     private int mAnimatorReverseResId = 0;
     private int mIndicatorBackgroundResId = R.drawable.white_radius;
     private int mIndicatorUnselectedBackgroundResId = R.drawable.white_radius;
-    private int mCurrentPosition = 0;
     private Animator mAnimationOut;
     private Animator mAnimationIn;
+
+    private int mLastPosition = -1;
 
     public CircleIndicator(Context context) {
         super(context);
@@ -122,12 +125,74 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
 
     public void setViewPager(ViewPager viewPager) {
         mViewpager = viewPager;
-        mCurrentPosition = mViewpager.getCurrentItem();
-        createIndicators(viewPager);
-        mViewpager.removeOnPageChangeListener(this);
-        mViewpager.addOnPageChangeListener(this);
-        onPageSelected(mCurrentPosition);
+        if (mViewpager != null && mViewpager.getAdapter() != null) {
+            createIndicators();
+            mViewpager.removeOnPageChangeListener(mInternalPageChangeListener);
+            mViewpager.addOnPageChangeListener(mInternalPageChangeListener);
+            mViewpager.getAdapter().registerDataSetObserver(mInternalDataSetObserver);
+            mInternalPageChangeListener.onPageSelected(mViewpager.getCurrentItem());
+        }
     }
+
+    private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener() {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override public void onPageSelected(int position) {
+
+            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
+                return;
+            }
+
+            if (mAnimationIn.isRunning()) mAnimationIn.cancel();
+            if (mAnimationOut.isRunning()) mAnimationOut.cancel();
+
+            if (mLastPosition >= 0) {
+                View currentIndicator = getChildAt(mLastPosition);
+                currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+                mAnimationIn.setTarget(currentIndicator);
+                mAnimationIn.start();
+            }
+
+            View selectedIndicator = getChildAt(position);
+            selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+            mAnimationOut.setTarget(selectedIndicator);
+            mAnimationOut.start();
+
+            mLastPosition = position;
+        }
+
+        @Override public void onPageScrollStateChanged(int state) {
+        }
+    };
+
+    private DataSetObserver mInternalDataSetObserver = new DataSetObserver() {
+        @Override public void onChanged() {
+            super.onChanged();
+
+            int newCount = mViewpager.getAdapter().getCount();
+            int currentCount = getChildCount();
+
+            if (newCount == currentCount) {  // No change
+                return;
+            } else if (mLastPosition < newCount) {
+                mLastPosition = mViewpager.getCurrentItem();
+            } else {
+                mLastPosition = -1;
+            }
+
+            Log.e("DataSetObserver", "mInternalDataSetObserver onChanged mLastPosition ="
+                    + mLastPosition
+                    + "; newCount = "
+                    + newCount
+                    + "; currentCount = "
+                    + currentCount);
+
+            createIndicators();
+        }
+    };
 
     /**
      * @deprecated User ViewPager addOnPageChangeListener
@@ -140,48 +205,25 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         mViewpager.addOnPageChangeListener(onPageChangeListener);
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    }
-
-    @Override public void onPageSelected(int position) {
-
-        if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
-            return;
-        }
-
-        if (mAnimationIn.isRunning()) mAnimationIn.end();
-        if (mAnimationOut.isRunning()) mAnimationOut.end();
-
-        View currentIndicator = getChildAt(mCurrentPosition);
-        currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
-        mAnimationIn.setTarget(currentIndicator);
-        mAnimationIn.start();
-
-        View selectedIndicator = getChildAt(position);
-        selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-        mAnimationOut.setTarget(selectedIndicator);
-        mAnimationOut.start();
-
-        mCurrentPosition = position;
-    }
-
-    @Override public void onPageScrollStateChanged(int state) {
-    }
-
-    private void createIndicators(ViewPager viewPager) {
+    private void createIndicators() {
         removeAllViews();
-        if (viewPager.getAdapter() == null) {
-            return;
-        }
-
-        int count = viewPager.getAdapter().getCount();
+        int count = mViewpager.getAdapter().getCount();
         if (count <= 0) {
             return;
         }
-        addIndicator(mIndicatorBackgroundResId, mAnimationOut);
-        for (int i = 1; i < count; i++) {
-            addIndicator(mIndicatorUnselectedBackgroundResId, mAnimationIn);
+        int currentItem = mViewpager.getCurrentItem();
+
+        Animator animationOut = mAnimationOut.clone();
+        animationOut.setDuration(0);
+        Animator animationIn = mAnimationIn.clone();
+        animationIn.setDuration(0);
+
+        for (int i = 0; i < count; i++) {
+            if (currentItem == i) {
+                addIndicator(mIndicatorBackgroundResId, animationOut);
+            } else {
+                addIndicator(mIndicatorUnselectedBackgroundResId, animationIn);
+            }
         }
     }
 

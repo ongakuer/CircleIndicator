@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="fragment_container"/>
+    <item type="id" name="toolbar"/>
+
+    <item type="id" name="demo_default"/>
+    <item type="id" name="demo_custom_animation"/>
+    <item type="id" name="demo_change_color"/>
+    <item type="id" name="demo_dynamic_adapter"/>
+
+    <item type="id" name="viewpager"/>
+    <item type="id" name="indicator"/>
+
+    <item type="id" name="add"/>
+    <item type="id" name="remove"/>
+
+
+</resources>
