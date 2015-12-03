@@ -12,7 +12,7 @@ android {
         versionCode 116
         versionName version
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
