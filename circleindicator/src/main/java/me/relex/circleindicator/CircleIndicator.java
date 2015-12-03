@@ -179,9 +179,12 @@ public class CircleIndicator extends LinearLayout implements OnPageChangeListene
         if (count <= 0) {
             return;
         }
-        addIndicator(mIndicatorBackgroundResId, mAnimationOut);
-        for (int i = 1; i < count; i++) {
-            addIndicator(mIndicatorUnselectedBackgroundResId, mAnimationIn);
+        mCurrentPosition = viewPager.getCurrentItem();
+        for (int i = 0; i < count; i++) {
+            if(i == mCurrentPosition)
+                addIndicator(mIndicatorBackgroundResId, mAnimationOut);
+            else
+                addIndicator(mIndicatorUnselectedBackgroundResId, mAnimationIn);
         }
     }
 
