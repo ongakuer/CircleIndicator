@@ -2,7 +2,7 @@ CircleIndicator
 ===============
 A lightweight viewpager indicator like in nexus 5 launcher 
 
-[![Download](https://api.bintray.com/packages/bintray/jcenter/me.relex%3Acircleindicator/images/download.svg) ](https://bintray.com/bintray/jcenter/me.relex%3Acircleindicator/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/ongakuer/maven/me.relex%3Acircleindicator/images/download.svg) ](https://bintray.com/ongakuer/maven/me.relex%3Acircleindicator/_latestVersion)
 
 ![CircleIndicator](/screenshot.gif)
 
