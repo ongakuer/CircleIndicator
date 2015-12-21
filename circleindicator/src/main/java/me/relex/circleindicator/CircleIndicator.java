@@ -27,8 +27,10 @@ public class CircleIndicator extends LinearLayout {
     private int mAnimatorReverseResId = 0;
     private int mIndicatorBackgroundResId = R.drawable.white_radius;
     private int mIndicatorUnselectedBackgroundResId = R.drawable.white_radius;
-    private Animator mAnimationOut;
-    private Animator mAnimationIn;
+    private Animator mAnimatorOut;
+    private Animator mAnimatorIn;
+    private Animator mImmediateAnimatorOut;
+    private Animator mImmediateAnimatorIn;
 
     private int mLastPosition = -1;
 
@@ -108,18 +110,35 @@ public class CircleIndicator extends LinearLayout {
                 (mIndicatorMargin < 0) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorMargin;
 
         mAnimatorResId = (mAnimatorResId == 0) ? R.animator.scale_with_alpha : mAnimatorResId;
-        mAnimationOut = AnimatorInflater.loadAnimator(context, mAnimatorResId);
-        if (mAnimatorReverseResId == 0) {
-            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
-            mAnimationIn.setInterpolator(new ReverseInterpolator());
-        } else {
-            mAnimationIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
-        }
+
+        mAnimatorOut = createAnimatorOut(context);
+        mImmediateAnimatorOut = createAnimatorOut(context);
+        mImmediateAnimatorOut.setDuration(0);
+
+        mAnimatorIn = createAnimatorIn(context);
+        mImmediateAnimatorIn = createAnimatorIn(context);
+        mImmediateAnimatorIn.setDuration(0);
+
         mIndicatorBackgroundResId = (mIndicatorBackgroundResId == 0) ? R.drawable.white_radius
                 : mIndicatorBackgroundResId;
         mIndicatorUnselectedBackgroundResId =
                 (mIndicatorUnselectedBackgroundResId == 0) ? mIndicatorBackgroundResId
                         : mIndicatorUnselectedBackgroundResId;
+    }
+
+    private Animator createAnimatorOut(Context context) {
+        return AnimatorInflater.loadAnimator(context, mAnimatorResId);
+    }
+
+    private Animator createAnimatorIn(Context context) {
+        Animator animatorIn;
+        if (mAnimatorReverseResId == 0) {
+            animatorIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
+            animatorIn.setInterpolator(new ReverseInterpolator());
+        } else {
+            animatorIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
+        }
+        return animatorIn;
     }
 
     public void setViewPager(ViewPager viewPager) {
@@ -145,20 +164,20 @@ public class CircleIndicator extends LinearLayout {
                 return;
             }
 
-            if (mAnimationIn.isRunning()) mAnimationIn.cancel();
-            if (mAnimationOut.isRunning()) mAnimationOut.cancel();
+            if (mAnimatorIn.isRunning()) mAnimatorIn.cancel();
+            if (mAnimatorOut.isRunning()) mAnimatorOut.cancel();
 
             if (mLastPosition >= 0) {
                 View currentIndicator = getChildAt(mLastPosition);
                 currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
-                mAnimationIn.setTarget(currentIndicator);
-                mAnimationIn.start();
+                mAnimatorIn.setTarget(currentIndicator);
+                mAnimatorIn.start();
             }
 
             View selectedIndicator = getChildAt(position);
             selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-            mAnimationOut.setTarget(selectedIndicator);
-            mAnimationOut.start();
+            mAnimatorOut.setTarget(selectedIndicator);
+            mAnimatorOut.start();
 
             mLastPosition = position;
         }
@@ -205,16 +224,11 @@ public class CircleIndicator extends LinearLayout {
         }
         int currentItem = mViewpager.getCurrentItem();
 
-        Animator animationOut = mAnimationOut.clone();
-        animationOut.setDuration(0);
-        Animator animationIn = mAnimationIn.clone();
-        animationIn.setDuration(0);
-
         for (int i = 0; i < count; i++) {
             if (currentItem == i) {
-                addIndicator(mIndicatorBackgroundResId, animationOut);
+                addIndicator(mIndicatorBackgroundResId, mImmediateAnimatorOut);
             } else {
-                addIndicator(mIndicatorUnselectedBackgroundResId, animationIn);
+                addIndicator(mIndicatorUnselectedBackgroundResId, mImmediateAnimatorIn);
             }
         }
     }
