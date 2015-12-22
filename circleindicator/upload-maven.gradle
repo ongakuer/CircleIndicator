@@ -26,12 +26,6 @@ uploadArchives {
             description 'a lightweight viewpager indicator like in nexus 5 launcher'
             url 'https://github.com/ongakuer/CircleIndicator'
 
-            scm {
-                url 'scm:git@github.com:ongakuer/CircleIndicator.git'
-                connection 'scm:git@github.com:ongakuer/CircleIndicator.git'
-                developerConnection 'scm:git@github.com:ongakuer/CircleIndicator.git'
-            }
-
             licenses {
                 license {
                     name 'The Apache Software License, Version 2.0'
@@ -46,6 +40,12 @@ uploadArchives {
                     name 'relex'
                     email 'wwwliangxin@gmail.com'
                 }
+            }
+
+            scm {
+                url 'https://github.com/ongakuer/CircleIndicator'
+                connection 'https://github.com/ongakuer/CircleIndicator.git'
+                developerConnection 'https://github.com/ongakuer/CircleIndicator.git'
             }
         }
     }

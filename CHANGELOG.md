@@ -1,6 +1,9 @@
 ChangeLog
 --------
 
+##### 1.1.7  (2015-12-21)
+* Fix bug ([#41](https://github.com/ongakuer/CircleIndicator/issues/41))
+
 ##### 1.1.6  (2015-12-03)
 * Support Dynamic Adapter
 * Fix bugs

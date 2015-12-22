@@ -1,0 +1,67 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+group = "me.relex"
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'CircleIndicator'
+            packaging 'aar'
+            description 'a lightweight viewpager indicator like in nexus 5 launcher'
+            url 'https://github.com/ongakuer/CircleIndicator'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'relex'
+                    name 'relex'
+                    email 'wwwliangxin@gmail.com'
+                }
+            }
+
+            scm {
+                url 'https://github.com/ongakuer/CircleIndicator'
+                connection 'https://github.com/ongakuer/CircleIndicator.git'
+                developerConnection 'https://github.com/ongakuer/CircleIndicator.git'
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "CircleIndicator"
+        websiteUrl = 'https://github.com/ongakuer/CircleIndicator'
+        vcsUrl = 'https://github.com/ongakuer/CircleIndicator.git'
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}

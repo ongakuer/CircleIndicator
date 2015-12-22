@@ -2,7 +2,7 @@ CircleIndicator
 ===============
 A lightweight viewpager indicator like in nexus 5 launcher 
 
-[ ![Download](https://api.bintray.com/packages/ongakuer/maven/me.relex%3Acircleindicator/images/download.svg) ](https://bintray.com/ongakuer/maven/me.relex%3Acircleindicator/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/ongakuer/maven/CircleIndicator/images/download.svg) ](https://bintray.com/ongakuer/maven/CircleIndicator/_latestVersion)
 
 ![CircleIndicator](/screenshot.gif)
 
@@ -14,7 +14,7 @@ Gradle
 
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.6@aar'
+    compile 'me.relex:circleindicator:1.1.7@aar'
 }
 ```
 
