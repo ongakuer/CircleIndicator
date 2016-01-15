@@ -1,6 +1,9 @@
 ChangeLog
 --------
 
+##### 1.1.8  (2016-01-15)
+* Fix bug ([#43](https://github.com/ongakuer/CircleIndicator/pull/43))
+
 ##### 1.1.7  (2015-12-21)
 * Fix bug ([#41](https://github.com/ongakuer/CircleIndicator/issues/41))
 

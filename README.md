@@ -14,7 +14,7 @@ Gradle
 
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.7@aar'
+    compile 'me.relex:circleindicator:1.1.8@aar'
 }
 ```
 
