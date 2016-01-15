@@ -1,7 +1,5 @@
 package me.relex.circleindicator;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.content.Context;
@@ -15,6 +13,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
+
+import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
 public class CircleIndicator extends LinearLayout {
 
@@ -165,13 +165,11 @@ public class CircleIndicator extends LinearLayout {
             }
 
             if (mAnimatorIn.isRunning()) {
-                // end the animation before start a new one
                 mAnimatorIn.end();
                 mAnimatorIn.cancel();
             }
 
             if (mAnimatorOut.isRunning()) {
-                // end the animation before start a new one
                 mAnimatorOut.end();
                 mAnimatorOut.cancel();
             }
@@ -243,7 +241,10 @@ public class CircleIndicator extends LinearLayout {
     }
 
     private void addIndicator(@DrawableRes int backgroundDrawableId, Animator animator) {
-        if (animator.isRunning()) animator.end();
+        if (animator.isRunning()) {
+            animator.end();
+            animator.cancel();
+        }
 
         View Indicator = new View(getContext());
         Indicator.setBackgroundResource(backgroundDrawableId);
