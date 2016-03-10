@@ -31,6 +31,10 @@
             android:text="@string/demo_dynamic_adapter"
             style="@style/ListText"/>
 
+        <TextView
+            android:id="@id/demo_on_indicator_click"
+            android:text="@string/demo_on_indicator_click"
+            style="@style/ListText"/>
 
     </android.support.v7.widget.LinearLayoutCompat>
 

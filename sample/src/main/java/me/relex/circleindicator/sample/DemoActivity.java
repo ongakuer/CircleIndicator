@@ -15,6 +15,7 @@ import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
+import me.relex.circleindicator.sample.fragment.OnIndicatorClickFragment;
 
 public class DemoActivity extends AppCompatActivity {
 
@@ -66,6 +67,7 @@ public class DemoActivity extends AppCompatActivity {
             view.findViewById(R.id.demo_custom_animation).setOnClickListener(this);
             view.findViewById(R.id.demo_change_color).setOnClickListener(this);
             view.findViewById(R.id.demo_dynamic_adapter).setOnClickListener(this);
+            view.findViewById(R.id.demo_on_indicator_click).setOnClickListener(this);
         }
 
         @Override public void onClick(View v) {
@@ -81,6 +83,9 @@ public class DemoActivity extends AppCompatActivity {
                     break;
                 case R.id.demo_dynamic_adapter:
                     navigateToFragment(DynamicAdapterFragment.class.getName());
+                    break;
+                case R.id.demo_on_indicator_click:
+                    navigateToFragment(OnIndicatorClickFragment.class.getName());
                     break;
             }
         }

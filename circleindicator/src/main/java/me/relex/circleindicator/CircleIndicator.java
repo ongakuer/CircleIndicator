@@ -16,7 +16,8 @@ import android.widget.LinearLayout;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
-public class CircleIndicator extends LinearLayout {
+
+public class CircleIndicator extends LinearLayout implements View.OnClickListener {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
     private ViewPager mViewpager;
@@ -33,6 +34,7 @@ public class CircleIndicator extends LinearLayout {
     private Animator mImmediateAnimatorIn;
 
     private int mLastPosition = -1;
+    private OnIndicatorClickListener mOnIndicatorClickListener;
 
     public CircleIndicator(Context context) {
         super(context);
@@ -152,6 +154,19 @@ public class CircleIndicator extends LinearLayout {
         }
     }
 
+    public void setOnIndicatorClickListener(OnIndicatorClickListener onIndicatorClickListener) {
+        this.mOnIndicatorClickListener = onIndicatorClickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Object tag = v.getTag();
+        if (tag != null && mOnIndicatorClickListener != null) {
+            int position = (int) tag;
+            mOnIndicatorClickListener.onIndicatorClick(position);
+        }
+    }
+
     private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener() {
 
         @Override
@@ -233,20 +248,24 @@ public class CircleIndicator extends LinearLayout {
 
         for (int i = 0; i < count; i++) {
             if (currentItem == i) {
-                addIndicator(mIndicatorBackgroundResId, mImmediateAnimatorOut);
+                addIndicator(i, mIndicatorBackgroundResId, mImmediateAnimatorOut);
             } else {
-                addIndicator(mIndicatorUnselectedBackgroundResId, mImmediateAnimatorIn);
+                addIndicator(i,mIndicatorUnselectedBackgroundResId, mImmediateAnimatorIn);
             }
         }
     }
 
-    private void addIndicator(@DrawableRes int backgroundDrawableId, Animator animator) {
+    private void addIndicator(int position, @DrawableRes int backgroundDrawableId, Animator animator) {
         if (animator.isRunning()) {
             animator.end();
             animator.cancel();
         }
 
         View Indicator = new View(getContext());
+        if (mOnIndicatorClickListener != null) {
+            Indicator.setOnClickListener(this);
+            Indicator.setTag(position);
+        }
         Indicator.setBackgroundResource(backgroundDrawableId);
         addView(Indicator, mIndicatorWidth, mIndicatorHeight);
         LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();

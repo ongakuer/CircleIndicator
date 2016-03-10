@@ -7,6 +7,7 @@
     <item type="id" name="demo_custom_animation"/>
     <item type="id" name="demo_change_color"/>
     <item type="id" name="demo_dynamic_adapter"/>
+    <item type="id" name="demo_on_indicator_click"/>
 
     <item type="id" name="viewpager"/>
     <item type="id" name="indicator"/>
