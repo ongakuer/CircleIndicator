@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">CircleIndicator</string>
-
-
-    <string name="demo_default">Default</string>
-    <string name="demo_custom_animation">Custom Animation</string>
-    <string name="demo_change_color">Change Color</string>
-    <string name="demo_dynamic_adapter">Dynamic Adapter</string>
-
     <string name="add">Add</string>
     <string name="remove">Remove</string>
-
+    <string name="reset">Random Reset</string>
 </resources>

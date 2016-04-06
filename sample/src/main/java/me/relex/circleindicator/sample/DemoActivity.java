@@ -7,14 +7,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import java.util.Arrays;
+import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
+import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 
 public class DemoActivity extends AppCompatActivity {
 
@@ -53,35 +59,65 @@ public class DemoActivity extends AppCompatActivity {
         });
     }
 
-    public static class DemoListFragment extends Fragment implements View.OnClickListener {
+    public static class DemoListFragment extends Fragment {
 
         @Nullable @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                 @Nullable Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_demo_list, container, false);
+            return new RecyclerView(getContext());
         }
 
         @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-            view.findViewById(R.id.demo_default).setOnClickListener(this);
-            view.findViewById(R.id.demo_custom_animation).setOnClickListener(this);
-            view.findViewById(R.id.demo_change_color).setOnClickListener(this);
-            view.findViewById(R.id.demo_dynamic_adapter).setOnClickListener(this);
+            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(new DemoListAdapter());
         }
 
-        @Override public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.demo_default:
-                    navigateToFragment(DefaultFragment.class.getName());
-                    break;
-                case R.id.demo_custom_animation:
-                    navigateToFragment(CustomAnimationFragment.class.getName());
-                    break;
-                case R.id.demo_change_color:
-                    navigateToFragment(ChangeColorFragment.class.getName());
-                    break;
-                case R.id.demo_dynamic_adapter:
-                    navigateToFragment(DynamicAdapterFragment.class.getName());
-                    break;
+        private class DemoListAdapter extends RecyclerView.Adapter<DemoViewHolder> {
+
+            private final List<String> mFragmentList;
+            private final List<String> mNameList;
+
+            public DemoListAdapter() {
+                mNameList = Arrays.asList(getResources().getStringArray(R.array.demo_name));
+                mFragmentList = Arrays.asList(//
+                        DefaultFragment.class.getName(),//
+                        CustomAnimationFragment.class.getName(),//
+                        ChangeColorFragment.class.getName(), //
+                        DynamicAdapterFragment.class.getName(),//
+                        ResetAdapterFragment.class.getName());
+            }
+
+            @Override public DemoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return DemoViewHolder.create(parent);
+            }
+
+            @Override public void onBindViewHolder(final DemoViewHolder holder, int position) {
+                holder.bindView(mNameList.get(position));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        navigateToFragment(mFragmentList.get(holder.getAdapterPosition()));
+                    }
+                });
+            }
+
+            @Override public int getItemCount() {
+                return mFragmentList.size();
+            }
+        }
+
+        private static class DemoViewHolder extends RecyclerView.ViewHolder {
+            public DemoViewHolder(View itemView) {
+                super(itemView);
+            }
+
+            public void bindView(String fragmentName) {
+                ((TextView) itemView).setText(fragmentName);
+            }
+
+            public static DemoViewHolder create(ViewGroup viewGroup) {
+                return new DemoViewHolder(LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.item_demo, viewGroup, false));
             }
         }
 

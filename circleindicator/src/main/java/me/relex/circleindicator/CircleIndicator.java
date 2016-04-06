@@ -144,6 +144,7 @@ public class CircleIndicator extends LinearLayout {
     public void setViewPager(ViewPager viewPager) {
         mViewpager = viewPager;
         if (mViewpager != null && mViewpager.getAdapter() != null) {
+            mLastPosition = -1;
             createIndicators();
             mViewpager.removeOnPageChangeListener(mInternalPageChangeListener);
             mViewpager.addOnPageChangeListener(mInternalPageChangeListener);

@@ -3,10 +3,8 @@ apply plugin: 'signing'
 
 group = "me.relex"
 
-configurations {
-    archives {
-        extendsFrom configurations.default
-    }
+configurations.archives {
+    extendsFrom configurations.default
 }
 
 uploadArchives {
