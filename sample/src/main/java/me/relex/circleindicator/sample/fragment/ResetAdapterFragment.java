@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.Random;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.sample.DemoPagerAdapter;
+import me.relex.circleindicator.sample.SamplePagerAdapter;
 import me.relex.circleindicator.sample.R;
 
 public class ResetAdapterFragment extends Fragment implements View.OnClickListener {
@@ -22,21 +22,21 @@ public class ResetAdapterFragment extends Fragment implements View.OnClickListen
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reset_adapter_demo, container, false);
+        return inflater.inflate(R.layout.fragment_sample_reset_adapter, container, false);
     }
 
     @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         view.findViewById(R.id.reset).setOnClickListener(this);
         mViewpager = (ViewPager) view.findViewById(R.id.viewpager);
         mIndicator = (CircleIndicator) view.findViewById(R.id.indicator);
-        mViewpager.setAdapter(new DemoPagerAdapter(5));
+        mViewpager.setAdapter(new SamplePagerAdapter(5));
         mIndicator.setViewPager(mViewpager);
     }
 
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reset:
-                mViewpager.setAdapter(new DemoPagerAdapter(1 + mRandom.nextInt(5)));
+                mViewpager.setAdapter(new SamplePagerAdapter(1 + mRandom.nextInt(5)));
                 mIndicator.setViewPager(mViewpager);
                 break;
         }

@@ -8,17 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.sample.DemoPagerAdapter;
+import me.relex.circleindicator.sample.SamplePagerAdapter;
 import me.relex.circleindicator.sample.R;
 
 public class DynamicAdapterFragment extends Fragment implements View.OnClickListener {
 
-    private DemoPagerAdapter mAdapter;
+    private SamplePagerAdapter mAdapter;
 
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dynamic_adapter_demo, container, false);
+        return inflater.inflate(R.layout.fragment_sample_dynamic_adapter, container, false);
     }
 
     @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class DynamicAdapterFragment extends Fragment implements View.OnClickList
         view.findViewById(R.id.add).setOnClickListener(this);
         view.findViewById(R.id.remove).setOnClickListener(this);
 
-        mAdapter = new DemoPagerAdapter(1);
+        mAdapter = new SamplePagerAdapter(1);
 
         ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);

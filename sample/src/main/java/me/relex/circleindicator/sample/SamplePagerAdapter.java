@@ -2,24 +2,22 @@ package me.relex.circleindicator.sample;
 
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.Random;
 
-public class DemoPagerAdapter extends PagerAdapter {
+public class SamplePagerAdapter extends PagerAdapter {
 
     private final Random random = new Random();
-    private final SparseArray<TextView> mHolderArray = new SparseArray<>();
     private int mSize;
 
-    public DemoPagerAdapter() {
+    public SamplePagerAdapter() {
         mSize = 5;
     }
 
-    public DemoPagerAdapter(int count) {
+    public SamplePagerAdapter(int count) {
         mSize = count;
     }
 
@@ -32,7 +30,7 @@ public class DemoPagerAdapter extends PagerAdapter {
     }
 
     @Override public void destroyItem(ViewGroup view, int position, Object object) {
-        view.removeView(mHolderArray.get(position));
+        view.removeView((View) object);
     }
 
     @Override public Object instantiateItem(ViewGroup view, int position) {
@@ -44,7 +42,6 @@ public class DemoPagerAdapter extends PagerAdapter {
         textView.setTextSize(48);
         view.addView(textView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        mHolderArray.put(position, textView);
         return textView;
     }
 

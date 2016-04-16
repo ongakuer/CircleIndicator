@@ -14,24 +14,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
+import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 
-public class DemoActivity extends AppCompatActivity {
+public class SampleActivity extends AppCompatActivity {
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_demo);
+        setContentView(R.layout.activity_sample);
 
         initToolbar();
 
-        Fragment demoFragment = Fragment.instantiate(this, DemoListFragment.class.getName());
+        Fragment demoFragment = Fragment.instantiate(this, SampleListFragment.class.getName());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment);
         fragmentTransaction.commit();
@@ -59,7 +60,7 @@ public class DemoActivity extends AppCompatActivity {
         });
     }
 
-    public static class DemoListFragment extends Fragment {
+    public static class SampleListFragment extends Fragment {
 
         @Nullable @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -68,56 +69,51 @@ public class DemoActivity extends AppCompatActivity {
         }
 
         @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            SampleListAdapter adapter = new SampleListAdapter();
+
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(new DemoListAdapter());
+            recyclerView.setAdapter(adapter);
+
+            adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
+            adapter.add(
+                    new SampleInfo("Custom Animation", CustomAnimationFragment.class.getName()));
+            adapter.add(new SampleInfo("Change Color", ChangeColorFragment.class.getName()));
+            adapter.add(new SampleInfo("Dynamic Adapter", DynamicAdapterFragment.class.getName()));
+            adapter.add(new SampleInfo("Reset Adapter", ResetAdapterFragment.class.getName()));
+            adapter.add(new SampleInfo("LoopViewPager", LoopViewPagerFragment.class.getName()));
         }
 
-        private class DemoListAdapter extends RecyclerView.Adapter<DemoViewHolder> {
+        private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
-            private final List<String> mFragmentList;
-            private final List<String> mNameList;
+            private final List<SampleInfo> mList = new ArrayList<>();
 
-            public DemoListAdapter() {
-                mNameList = Arrays.asList(getResources().getStringArray(R.array.demo_name));
-                mFragmentList = Arrays.asList(//
-                        DefaultFragment.class.getName(),//
-                        CustomAnimationFragment.class.getName(),//
-                        ChangeColorFragment.class.getName(), //
-                        DynamicAdapterFragment.class.getName(),//
-                        ResetAdapterFragment.class.getName());
+            @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return ItemViewHolder.create(parent);
             }
 
-            @Override public DemoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return DemoViewHolder.create(parent);
-            }
-
-            @Override public void onBindViewHolder(final DemoViewHolder holder, int position) {
-                holder.bindView(mNameList.get(position));
+            @Override public void onBindViewHolder(final ItemViewHolder holder, int position) {
+                SampleInfo sample = mList.get(position);
+                holder.bindView(sample.title);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override public void onClick(View v) {
-                        navigateToFragment(mFragmentList.get(holder.getAdapterPosition()));
+                        navigateToFragment(mList.get(holder.getAdapterPosition()).fragmentName);
                     }
                 });
             }
 
             @Override public int getItemCount() {
-                return mFragmentList.size();
-            }
-        }
-
-        private static class DemoViewHolder extends RecyclerView.ViewHolder {
-            public DemoViewHolder(View itemView) {
-                super(itemView);
+                return mList.size();
             }
 
-            public void bindView(String fragmentName) {
-                ((TextView) itemView).setText(fragmentName);
-            }
-
-            public static DemoViewHolder create(ViewGroup viewGroup) {
-                return new DemoViewHolder(LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.item_demo, viewGroup, false));
+            public boolean add(SampleInfo object) {
+                int lastIndex = mList.size();
+                if (mList.add(object)) {
+                    notifyItemInserted(lastIndex);
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
 
@@ -129,6 +125,31 @@ public class DemoActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.addToBackStack(fragmentName);
             fragmentTransaction.commit();
+        }
+
+        private static class ItemViewHolder extends RecyclerView.ViewHolder {
+            public ItemViewHolder(View itemView) {
+                super(itemView);
+            }
+
+            public void bindView(String title) {
+                ((TextView) itemView).setText(title);
+            }
+
+            public static ItemViewHolder create(ViewGroup viewGroup) {
+                return new ItemViewHolder(LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.item_view, viewGroup, false));
+            }
+        }
+
+        private static class SampleInfo {
+            public String title;
+            public String fragmentName;
+
+            public SampleInfo(String title, String fragmentName) {
+                this.title = title;
+                this.fragmentName = fragmentName;
+            }
         }
     }
 }

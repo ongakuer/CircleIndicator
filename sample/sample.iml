@@ -47,6 +47,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
@@ -54,6 +55,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -61,6 +63,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
@@ -68,6 +71,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
@@ -75,18 +79,21 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
@@ -94,17 +101,21 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/build/ivy.xml" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform (1)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-23.2.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="support-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-23.3.0" level="project" />
+    <orderEntry type="module" module-name="LoopingViewPager" exported="" />
     <orderEntry type="module" module-name="circleindicator" exported="" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">

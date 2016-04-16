@@ -1,18 +1,15 @@
 apply plugin: 'com.android.library'
 
-version = "1.1.9"
-
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 8
         targetSdkVersion 23
-        versionCode 119
-        versionName version
+        versionCode 1
+        versionName "1.0"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +21,3 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:23.3.0'
 }
-
-//apply from: "upload-jcenter.gradle"
-//apply from: "upload-maven.gradle"

@@ -1,6 +1,11 @@
 ChangeLog
 --------
 
+##### 1.1.9  (2016-04-16)
+* Fix bug ([#51](https://github.com/ongakuer/CircleIndicator/issues/51))
+* Add Reset Adapter Sample
+* Add LoopViewPager Sample
+
 ##### 1.1.8  (2016-01-15)
 * Fix bug ([#43](https://github.com/ongakuer/CircleIndicator/pull/43))
 
@@ -10,7 +15,7 @@ ChangeLog
 ##### 1.1.6  (2015-12-03)
 * Support Dynamic Adapter
 * Fix bugs
-* Rewrite Demos
+* Rewrite Samples
 
 ##### 1.1.5  (2015-06-28)
 * Fix bug ([#22](https://github.com/ongakuer/CircleIndicator/issues/22))

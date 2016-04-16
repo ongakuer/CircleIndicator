@@ -3,11 +3,6 @@
     <item type="id" name="fragment_container"/>
     <item type="id" name="toolbar"/>
 
-    <item type="id" name="demo_default"/>
-    <item type="id" name="demo_custom_animation"/>
-    <item type="id" name="demo_change_color"/>
-    <item type="id" name="demo_dynamic_adapter"/>
-    <item type="id" name="demo_reset_adapter"/>
 
     <item type="id" name="viewpager"/>
     <item type="id" name="indicator"/>

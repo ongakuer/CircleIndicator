@@ -8,13 +8,9 @@ A lightweight viewpager indicator like in nexus 5 launcher
 
 Gradle
 ------------
-
-
-
-
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.8@aar'
+    compile 'me.relex:circleindicator:1.1.9@aar'
 }
 ```
 
@@ -23,8 +19,15 @@ Usage
 --------
 ```xml
 	<me.relex.circleindicator.CircleIndicator
+		android:id="@id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
+```
+```java
+    ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+    CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+    mViewPager.setAdapter(mPageAdapter);
+    indicator.setViewPager(mViewPager);
 ```
 
 #####Properties:
