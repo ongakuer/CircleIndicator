@@ -26,8 +26,8 @@ Usage
 ```java
     ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
     CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
-    mViewPager.setAdapter(mPageAdapter);
-    indicator.setViewPager(mViewPager);
+    viewpager.setAdapter(mPageAdapter);
+    indicator.setViewPager(viewpager);
 ```
 
 #####Properties:
