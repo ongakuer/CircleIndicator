@@ -2,9 +2,11 @@ package me.relex.circleindicator;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.os.Build;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.ViewPager;
@@ -44,9 +46,18 @@ public class CircleIndicator extends LinearLayout {
         init(context, attrs);
     }
 
+    public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs);
+    }
+
     private void init(Context context, AttributeSet attrs) {
-        setOrientation(LinearLayout.HORIZONTAL);
-        setGravity(Gravity.CENTER);
         handleTypedArray(context, attrs);
         checkIndicatorConfig(context);
     }
@@ -74,6 +85,13 @@ public class CircleIndicator extends LinearLayout {
         mIndicatorUnselectedBackgroundResId =
                 typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
                         mIndicatorBackgroundResId);
+
+        int orientation = typedArray.getInt(R.styleable.CircleIndicator_orientation, -1);
+        setOrientation(orientation == VERTICAL ? VERTICAL : HORIZONTAL);
+
+        int gravity = typedArray.getInt(R.styleable.CircleIndicator_gravity, -1);
+        setGravity(gravity >= 0 ? gravity : Gravity.CENTER);
+
         typedArray.recycle();
     }
 
