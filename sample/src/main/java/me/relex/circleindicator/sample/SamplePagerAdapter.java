@@ -45,10 +45,6 @@ public class SamplePagerAdapter extends PagerAdapter {
         return textView;
     }
 
-    @Override public int getItemPosition(Object object) {
-        return POSITION_NONE;
-    }
-
     public void addItem() {
         mSize++;
         notifyDataSetChanged();

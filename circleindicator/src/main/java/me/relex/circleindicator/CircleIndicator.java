@@ -166,7 +166,6 @@ public class CircleIndicator extends LinearLayout {
             createIndicators();
             mViewpager.removeOnPageChangeListener(mInternalPageChangeListener);
             mViewpager.addOnPageChangeListener(mInternalPageChangeListener);
-            mViewpager.getAdapter().registerDataSetObserver(mInternalDataSetObserver);
             mInternalPageChangeListener.onPageSelected(mViewpager.getCurrentItem());
         }
     }
@@ -193,18 +192,19 @@ public class CircleIndicator extends LinearLayout {
                 mAnimatorOut.cancel();
             }
 
-            if (mLastPosition >= 0) {
-                View currentIndicator = getChildAt(mLastPosition);
+            View currentIndicator;
+            if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
                 currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
                 mAnimatorIn.setTarget(currentIndicator);
                 mAnimatorIn.start();
             }
 
             View selectedIndicator = getChildAt(position);
-            selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-            mAnimatorOut.setTarget(selectedIndicator);
-            mAnimatorOut.start();
-
+            if (selectedIndicator != null) {
+                selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+                mAnimatorOut.setTarget(selectedIndicator);
+                mAnimatorOut.start();
+            }
             mLastPosition = position;
         }
 
@@ -212,9 +212,16 @@ public class CircleIndicator extends LinearLayout {
         }
     };
 
+    public DataSetObserver getDataSetObserver() {
+        return mInternalDataSetObserver;
+    }
+
     private DataSetObserver mInternalDataSetObserver = new DataSetObserver() {
         @Override public void onChanged() {
             super.onChanged();
+            if (mViewpager == null) {
+                return;
+            }
 
             int newCount = mViewpager.getAdapter().getCount();
             int currentCount = getChildCount();

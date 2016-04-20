@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.sample.SamplePagerAdapter;
 import me.relex.circleindicator.sample.R;
+import me.relex.circleindicator.sample.SamplePagerAdapter;
 
 public class DynamicAdapterFragment extends Fragment implements View.OnClickListener {
 
@@ -26,12 +26,17 @@ public class DynamicAdapterFragment extends Fragment implements View.OnClickList
         view.findViewById(R.id.add).setOnClickListener(this);
         view.findViewById(R.id.remove).setOnClickListener(this);
 
-        mAdapter = new SamplePagerAdapter(1);
+        mAdapter = new SamplePagerAdapter(1) {
+            @Override public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+        };
 
         ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
         viewpager.setAdapter(mAdapter);
         indicator.setViewPager(viewpager);
+        mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
     }
 
     @Override public void onClick(View v) {
