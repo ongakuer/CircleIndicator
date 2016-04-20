@@ -10,7 +10,7 @@ Gradle
 ------------
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.9@aar'
+    compile 'me.relex:circleindicator:1.2.0@aar'
 }
 ```
 
