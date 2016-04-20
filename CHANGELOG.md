@@ -6,11 +6,11 @@ ChangeLog
 * Remove auto register DataSetObserver. [#54](https://github.com/ongakuer/CircleIndicator/issues/54)
 
  <b>Please change like this if you used dynamic adapter:</b>
-```java
-viewpager.setAdapter(mAdapter);
-indicator.setViewPager(viewpager);
-mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
-```
+    ```java
+    viewpager.setAdapter(mAdapter);
+    indicator.setViewPager(viewpager);
+    mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+    ```
 
 ##### 1.1.9  (2016-04-16)
 * Fix bug ([#51](https://github.com/ongakuer/CircleIndicator/issues/51))

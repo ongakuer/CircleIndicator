@@ -14,7 +14,6 @@ dependencies {
 }
 ```
 
-
 Usage
 --------
 ```xml
@@ -39,7 +38,20 @@ Usage
 * `app:ci_drawable_unselected`
 * `app:ci_animator`
 * `app:ci_animator_reverse`
+* `app:orientation` (default:horizontal)
+* `app:gravity` (default:center)
 
+
+
+[Changelog](/CHANGELOG.md)
+------------
+##### v1.2.0 Please change like this if you used dynamic adapter
+
+```java
+viewpager.setAdapter(mAdapter);
+indicator.setViewPager(viewpager);
+mAdapter.registerDataSetObserver(indicator.getDataSetObserver());
+```
 
 
 License
