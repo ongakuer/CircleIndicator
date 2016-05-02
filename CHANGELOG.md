@@ -1,5 +1,8 @@
 ChangeLog
 --------
+##### 1.2.1
+* Fix bug ([#57](https://github.com/ongakuer/CircleIndicator/issues/57)), Rename properties: ```orientation```->```ci_orientation``` , ```gravity```->```ci_gravity```
+
 
 ##### 1.2.0
 * Add properties : ```orientation```(default:horizontal) ， ```gravity```(default:center)

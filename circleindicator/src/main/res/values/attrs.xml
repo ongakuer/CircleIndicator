@@ -10,14 +10,14 @@
         <attr name="ci_drawable" format="reference"/>
         <attr name="ci_drawable_unselected" format="reference"/>
 
-        <attr name="orientation" format="enum">
+        <attr name="ci_orientation" format="enum">
             <!-- Defines an horizontal widget. -->
             <enum name="horizontal" value="0"/>
             <!-- Defines a vertical widget. -->
             <enum name="vertical" value="1"/>
         </attr>
 
-        <attr name="gravity">
+        <attr name="ci_gravity">
             <!-- Push object to the top of its container, not changing its size. -->
             <flag name="top" value="0x30"/>
             <!-- Push object to the bottom of its container, not changing its size. -->

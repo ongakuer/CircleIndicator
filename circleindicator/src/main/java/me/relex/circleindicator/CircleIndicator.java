@@ -86,10 +86,10 @@ public class CircleIndicator extends LinearLayout {
                 typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
                         mIndicatorBackgroundResId);
 
-        int orientation = typedArray.getInt(R.styleable.CircleIndicator_orientation, -1);
+        int orientation = typedArray.getInt(R.styleable.CircleIndicator_ci_orientation, -1);
         setOrientation(orientation == VERTICAL ? VERTICAL : HORIZONTAL);
 
-        int gravity = typedArray.getInt(R.styleable.CircleIndicator_gravity, -1);
+        int gravity = typedArray.getInt(R.styleable.CircleIndicator_ci_gravity, -1);
         setGravity(gravity >= 0 ? gravity : Gravity.CENTER);
 
         typedArray.recycle();

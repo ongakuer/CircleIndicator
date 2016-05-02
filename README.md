@@ -10,7 +10,7 @@ Gradle
 ------------
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.1.9@aar'
+    compile 'me.relex:circleindicator:1.2.1@aar'
 }
 ```
 
@@ -38,8 +38,8 @@ Usage
 * `app:ci_drawable_unselected`
 * `app:ci_animator`
 * `app:ci_animator_reverse`
-* `app:orientation` (default:horizontal)
-* `app:gravity` (default:center)
+* `app:ci_orientation` (default:horizontal)
+* `app:ci_gravity` (default:center)
 
 
 
