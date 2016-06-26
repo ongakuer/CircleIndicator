@@ -18,7 +18,7 @@ Usage
 --------
 ```xml
 	<me.relex.circleindicator.CircleIndicator
-		android:id="@id/indicator"
+		android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"/>
 ```
