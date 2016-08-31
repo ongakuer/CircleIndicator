@@ -3,12 +3,12 @@ apply plugin: 'com.android.library'
 version = "1.2.1"
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 121
         versionName version
     }
@@ -21,8 +21,13 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = "24.2.0"
+}
+
 dependencies {
-    compile 'com.android.support:support-v4:23.3.0'
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
 }
 
 //apply from: "upload-jcenter.gradle"
