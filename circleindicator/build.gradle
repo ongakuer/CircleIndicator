@@ -3,12 +3,12 @@ apply plugin: 'com.android.library'
 version = "1.2.1"
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 121
         versionName version
     }
@@ -22,7 +22,7 @@ android {
 }
 
 ext {
-    supportLibVersion = "24.2.0"
+    supportLibVersion = "23.3.0"
 }
 
 dependencies {
