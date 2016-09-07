@@ -17,9 +17,9 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_default"
-            android:layout_centerInParent="true"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
 
@@ -35,15 +35,15 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_custom"
-            app:ci_width="10dp"
-            app:ci_height="4dp"
-            app:ci_margin="6dp"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
             app:ci_animator="@animator/indicator_animator"
             app:ci_animator_reverse="@animator/indicator_animator_reverse"
             app:ci_drawable="@drawable/black_radius_square"
-            android:layout_centerInParent="true"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"/>
+            app:ci_height="4dp"
+            app:ci_margin="6dp"
+            app:ci_width="10dp"/>
 
     </RelativeLayout>
 
@@ -60,15 +60,14 @@
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator_unselected_background"
-            android:layout_centerInParent="true"
             android:layout_width="fill_parent"
-            app:ci_width="6dp"
-            app:ci_height="6dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
             app:ci_animator="@animator/indicator_no_animator"
             app:ci_drawable="@drawable/white_radius"
             app:ci_drawable_unselected="@drawable/black_radius"
-            android:layout_height="40dp"
-            />
+            app:ci_height="6dp"
+            app:ci_width="6dp"/>
     </RelativeLayout>
 
 

@@ -1,5 +1,5 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,24 +10,25 @@
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@id/indicator"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="48dp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@id/add"
-        android:layout_gravity="right"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:textColor="@android:color/black"/>
+        android:layout_gravity="right"
+        android:text="@string/add"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@id/remove"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/remove"
-        android:textColor="@android:color/black"/>
+        android:layout_gravity="left"
+        android:text="@string/remove"/>
 
 </FrameLayout>

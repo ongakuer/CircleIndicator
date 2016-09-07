@@ -4,4 +4,6 @@
     <string name="add">Add</string>
     <string name="remove">Remove</string>
     <string name="reset">Random Reset</string>
+    <string name="toggle_snackbar">Toggle Snackbar</string>
+
 </resources>

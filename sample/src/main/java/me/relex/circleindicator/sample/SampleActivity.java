@@ -20,9 +20,9 @@ import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
-import me.relex.circleindicator.sample.fragment.InCoordinatorLayoutFragment;
 import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
+import me.relex.circleindicator.sample.fragment.SnackbarBehaviourFragment;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -83,8 +83,8 @@ public class SampleActivity extends AppCompatActivity {
             adapter.add(new SampleInfo("Dynamic Adapter", DynamicAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("Reset Adapter", ResetAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("LoopViewPager", LoopViewPagerFragment.class.getName()));
-            adapter.add(new SampleInfo("With SnackBar in CoordinatorLayout",
-                            InCoordinatorLayoutFragment.class.getName()));
+            adapter.add(new SampleInfo("Snackbar Behaviour",
+                    SnackbarBehaviourFragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {

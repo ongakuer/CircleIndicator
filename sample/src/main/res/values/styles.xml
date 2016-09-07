@@ -20,4 +20,7 @@
     </style>
 
 
+    <style name="DefaultButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+    </style>
 </resources>

@@ -9,9 +9,6 @@ import android.database.DataSetObserver;
 import android.os.Build;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.DrawableRes;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -19,11 +16,8 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
-import java.util.List;
-
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
-@CoordinatorLayout.DefaultBehavior(CircleIndicator.CircleIndicatorCoordinatorLayoutBehaviour.class)
 public class CircleIndicator extends LinearLayout {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
@@ -299,41 +293,5 @@ public class CircleIndicator extends LinearLayout {
     public int dip2px(float dpValue) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
-    }
-
-    protected static class CircleIndicatorCoordinatorLayoutBehaviour extends CoordinatorLayout.Behavior<CircleIndicator> {
-
-        public CircleIndicatorCoordinatorLayoutBehaviour() {}
-
-        public CircleIndicatorCoordinatorLayoutBehaviour(Context context, AttributeSet attributeSet) {
-            super(context, attributeSet);
-        }
-
-        @Override
-        public boolean layoutDependsOn(CoordinatorLayout parent, CircleIndicator child, View dependency) {
-            return dependency instanceof Snackbar.SnackbarLayout;
-        }
-
-        @Override
-        public boolean onDependentViewChanged(CoordinatorLayout parent, CircleIndicator child, View dependency) {
-            float translationY = getCircleIndicatorTranslationYForSnackbar(parent, child);
-            child.setTranslationY(translationY);
-            return true;
-        }
-
-        // Cred to https://www.bignerdranch.com/blog/customizing-coordinatorlayouts-behavior/
-        private float getCircleIndicatorTranslationYForSnackbar(CoordinatorLayout parent, CircleIndicator ci) {
-            float minOffset = 0;
-            final List<View> dependencies = parent.getDependencies(ci);
-            for (int i = 0, z = dependencies.size(); i < z; i++) {
-                final View view = dependencies.get(i);
-                if (view instanceof Snackbar.SnackbarLayout && parent.doViewsOverlap(ci, view)) {
-                    minOffset = Math.min(minOffset,
-                            ViewCompat.getTranslationY(view) - view.getHeight());;
-                }
-            }
-
-            return minOffset;
-        }
     }
 }

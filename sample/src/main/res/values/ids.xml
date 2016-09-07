@@ -8,9 +8,10 @@
     <item type="id" name="indicator"/>
     <item type="id" name="recycler_view"/>
 
+    <item type="id" name="coordinator_layout"/>
+
     <item type="id" name="add"/>
     <item type="id" name="remove"/>
-    <item type="id" name="reset"/>
-
+    <item type="id" name="button"/>
 
 </resources>

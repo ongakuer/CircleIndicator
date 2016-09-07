@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.Random;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.sample.SamplePagerAdapter;
 import me.relex.circleindicator.sample.R;
+import me.relex.circleindicator.sample.SamplePagerAdapter;
 
-public class ResetAdapterFragment extends Fragment implements View.OnClickListener {
+public class ResetAdapterFragment extends Fragment {
 
     private final Random mRandom = new Random();
 
@@ -26,19 +26,16 @@ public class ResetAdapterFragment extends Fragment implements View.OnClickListen
     }
 
     @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        view.findViewById(R.id.reset).setOnClickListener(this);
         mViewpager = (ViewPager) view.findViewById(R.id.viewpager);
         mIndicator = (CircleIndicator) view.findViewById(R.id.indicator);
         mViewpager.setAdapter(new SamplePagerAdapter(5));
         mIndicator.setViewPager(mViewpager);
-    }
 
-    @Override public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.reset:
+        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
                 mViewpager.setAdapter(new SamplePagerAdapter(1 + mRandom.nextInt(5)));
                 mIndicator.setViewPager(mViewpager);
-                break;
-        }
+            }
+        });
     }
 }
