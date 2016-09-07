@@ -12,14 +12,14 @@ import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SamplePagerAdapter;
 
-public class SnackbarBehaviourFragment extends Fragment {
+public class SnackbarBehaviorFragment extends Fragment {
 
     private Snackbar mSnackbar;
 
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sample_snackbar_behaviour, container, false);
+        return inflater.inflate(R.layout.fragment_sample_snackbar_behavior, container, false);
     }
 
     @Override public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class SnackbarBehaviourFragment extends Fragment {
 
         mSnackbar = Snackbar.make(view.findViewById(R.id.coordinator_layout), "Snackbar",
                 Snackbar.LENGTH_SHORT);
-        
+
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 if (!mSnackbar.isShown()) {

@@ -8,12 +8,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import java.util.List;
 
-public class SnackbarBehaviour extends CoordinatorLayout.Behavior<CircleIndicator> {
+public class SnackbarBehavior extends CoordinatorLayout.Behavior<CircleIndicator> {
 
-    public SnackbarBehaviour() {
+    public SnackbarBehavior() {
     }
 
-    public SnackbarBehaviour(Context context, AttributeSet attributeSet) {
+    public SnackbarBehavior(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }
 
