@@ -256,17 +256,20 @@ public class CircleIndicator extends LinearLayout {
             return;
         }
         int currentItem = mViewpager.getCurrentItem();
+        int orientation = getOrientation();
 
         for (int i = 0; i < count; i++) {
             if (currentItem == i) {
-                addIndicator(mIndicatorBackgroundResId, mImmediateAnimatorOut);
+                addIndicator(orientation, mIndicatorBackgroundResId, mImmediateAnimatorOut);
             } else {
-                addIndicator(mIndicatorUnselectedBackgroundResId, mImmediateAnimatorIn);
+                addIndicator(orientation, mIndicatorUnselectedBackgroundResId,
+                        mImmediateAnimatorIn);
             }
         }
     }
 
-    private void addIndicator(@DrawableRes int backgroundDrawableId, Animator animator) {
+    private void addIndicator(int orientation, @DrawableRes int backgroundDrawableId,
+            Animator animator) {
         if (animator.isRunning()) {
             animator.end();
             animator.cancel();
@@ -276,8 +279,15 @@ public class CircleIndicator extends LinearLayout {
         Indicator.setBackgroundResource(backgroundDrawableId);
         addView(Indicator, mIndicatorWidth, mIndicatorHeight);
         LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();
-        lp.leftMargin = mIndicatorMargin;
-        lp.rightMargin = mIndicatorMargin;
+
+        if (orientation == HORIZONTAL) {
+            lp.leftMargin = mIndicatorMargin;
+            lp.rightMargin = mIndicatorMargin;
+        } else {
+            lp.topMargin = mIndicatorMargin;
+            lp.bottomMargin = mIndicatorMargin;
+        }
+
         Indicator.setLayoutParams(lp);
 
         animator.setTarget(Indicator);
