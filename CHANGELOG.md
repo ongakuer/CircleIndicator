@@ -1,8 +1,12 @@
 ChangeLog
 --------
+
+##### 1.2.2   
+* Fix bug ([#69](https://github.com/ongakuer/CircleIndicator/issues/69))
+* Add SnackbarBehavior ([@daniellAlgar](https://github.com/daniellAlgar))
+
 ##### 1.2.1
 * Fix bug ([#57](https://github.com/ongakuer/CircleIndicator/issues/57)), Rename properties: ```orientation```->```ci_orientation``` , ```gravity```->```ci_gravity```
-
 
 ##### 1.2.0
 * Add properties : ```orientation```(default:horizontal) ， ```gravity```(default:center)

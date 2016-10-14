@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version = "1.2.1"
+version = "1.2.2"
 
 android {
     compileSdkVersion 24
@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 24
-        versionCode 121
+        versionCode 122
         versionName version
     }
 
