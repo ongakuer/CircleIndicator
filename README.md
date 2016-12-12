@@ -40,6 +40,7 @@ Usage
 * `app:ci_animator_reverse`
 * `app:ci_orientation` (default:horizontal)
 * `app:ci_gravity` (default:center)
+* `app:ci_hide_if_single_page`
 
 
 
