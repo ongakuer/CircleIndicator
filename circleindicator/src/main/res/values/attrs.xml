@@ -54,6 +54,8 @@
             <flag name="end" value="0x00800005"/>
         </attr>
 
+        <attr name="ci_hide_if_single_page" format="boolean"/>
+
     </declare-styleable>
 
 
