@@ -29,7 +29,7 @@ Usage
     indicator.setViewPager(viewpager);
 ```
 
-#####Properties:
+##### Properties:
 
 * `app:ci_width`
 * `app:ci_height`
