@@ -29,6 +29,7 @@ public class CircleIndicator extends LinearLayout {
     private int mAnimatorReverseResId = 0;
     private int mIndicatorBackgroundResId = R.drawable.white_radius;
     private int mIndicatorUnselectedBackgroundResId = R.drawable.white_radius;
+    private boolean mHideIfSinglePage;
     private Animator mAnimatorOut;
     private Animator mAnimatorIn;
     private Animator mImmediateAnimatorOut;
@@ -85,6 +86,8 @@ public class CircleIndicator extends LinearLayout {
         mIndicatorUnselectedBackgroundResId =
                 typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
                         mIndicatorBackgroundResId);
+        mHideIfSinglePage =
+                typedArray.getBoolean(R.styleable.CircleIndicator_ci_hide_if_single_page, false);
 
         int orientation = typedArray.getInt(R.styleable.CircleIndicator_ci_orientation, -1);
         setOrientation(orientation == VERTICAL ? VERTICAL : HORIZONTAL);
@@ -252,7 +255,7 @@ public class CircleIndicator extends LinearLayout {
     private void createIndicators() {
         removeAllViews();
         int count = mViewpager.getAdapter().getCount();
-        if (count <= 0) {
+        if (count <= 0 || mHideIfSinglePage && count == 1) {
             return;
         }
         int currentItem = mViewpager.getCurrentItem();
