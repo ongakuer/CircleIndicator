@@ -16,13 +16,13 @@
 package com.imbryk.viewPager;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoopViewPager extends ViewPager {
+public class LoopViewPager extends androidx.viewpager.widget.ViewPager {
     private static final boolean DEFAULT_BOUNDARY_CASHING = false;
     private static final boolean DEFAULT_BOUNDARY_LOOPING = true;
 
@@ -64,7 +64,7 @@ public class LoopViewPager extends ViewPager {
         }
     }
 
-    @Override public void setAdapter(PagerAdapter adapter) {
+    @Override public void setAdapter(androidx.viewpager.widget.PagerAdapter adapter) {
         mAdapter = new LoopPagerAdapterWrapper(adapter);
         mAdapter.setBoundaryCaching(mBoundaryCaching);
         mAdapter.setBoundaryLooping(mBoundaryLooping);
@@ -72,7 +72,7 @@ public class LoopViewPager extends ViewPager {
         setCurrentItem(0, false);
     }
 
-    @Override public PagerAdapter getAdapter() {
+    @Override public androidx.viewpager.widget.PagerAdapter getAdapter() {
         return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
     }
 

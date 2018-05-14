@@ -16,16 +16,16 @@
 package com.imbryk.viewPager;
 
 import android.os.Parcelable;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class LoopPagerAdapterWrapper extends PagerAdapter {
 
-    private PagerAdapter mAdapter;
+    private androidx.viewpager.widget.PagerAdapter mAdapter;
 
     private SparseArray<ToDestroy> mToDestroy = new SparseArray<>();
 
@@ -43,7 +43,7 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
         mBoundaryLooping = flag;
     }
 
-    LoopPagerAdapterWrapper(PagerAdapter adapter) {
+    LoopPagerAdapterWrapper(androidx.viewpager.widget.PagerAdapter adapter) {
         this.mAdapter = adapter;
     }
 
@@ -92,7 +92,7 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
 
     @Override public Object instantiateItem(ViewGroup container, int position) {
         int realPosition = (mAdapter instanceof FragmentPagerAdapter
-                || mAdapter instanceof FragmentStatePagerAdapter) ? position
+                || mAdapter instanceof androidx.fragment.app.FragmentStatePagerAdapter) ? position
                 : toRealPosition(position);
 
         if (mBoundaryCaching) {

@@ -1,9 +1,9 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,7 @@ import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SamplePagerAdapter;
 
-public class DynamicAdapterFragment extends Fragment implements View.OnClickListener {
+public class DynamicAdapterFragment extends androidx.fragment.app.Fragment implements View.OnClickListener {
 
     private SamplePagerAdapter mAdapter;
 
@@ -32,7 +32,7 @@ public class DynamicAdapterFragment extends Fragment implements View.OnClickList
             }
         };
 
-        ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+        ViewPager viewpager = (androidx.viewpager.widget.ViewPager) view.findViewById(R.id.viewpager);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
         viewpager.setAdapter(mAdapter);
         indicator.setViewPager(viewpager);
