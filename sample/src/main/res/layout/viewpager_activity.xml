@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_default"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_custom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -53,7 +53,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_unselected_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

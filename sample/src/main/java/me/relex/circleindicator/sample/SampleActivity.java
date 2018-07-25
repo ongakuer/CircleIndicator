@@ -1,15 +1,15 @@
 package me.relex.circleindicator.sample;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +34,7 @@ public class SampleActivity extends AppCompatActivity {
         initToolbar();
 
         Fragment demoFragment = Fragment.instantiate(this, SampleListFragment.class.getName());
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        androidx.fragment.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment);
         fragmentTransaction.commit();
 
@@ -72,8 +72,8 @@ public class SampleActivity extends AppCompatActivity {
         @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             SampleListAdapter adapter = new SampleListAdapter();
 
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            RecyclerView recyclerView = (androidx.recyclerview.widget.RecyclerView) view;
+            recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(getContext()));
             recyclerView.setAdapter(adapter);
 
             adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
@@ -121,8 +121,8 @@ public class SampleActivity extends AppCompatActivity {
         }
 
         private void navigateToFragment(String fragmentName) {
-            Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            androidx.fragment.app.Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
+            androidx.fragment.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                     android.R.anim.fade_in, android.R.anim.fade_out);
             fragmentTransaction.replace(R.id.fragment_container, fragment);

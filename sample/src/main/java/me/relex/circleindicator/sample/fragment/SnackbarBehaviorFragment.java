@@ -1,10 +1,10 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,9 @@ import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SamplePagerAdapter;
 
-public class SnackbarBehaviorFragment extends Fragment {
+public class SnackbarBehaviorFragment extends androidx.fragment.app.Fragment {
 
-    private Snackbar mSnackbar;
+    private com.google.android.material.snackbar.Snackbar mSnackbar;
 
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -28,8 +28,8 @@ public class SnackbarBehaviorFragment extends Fragment {
         viewpager.setAdapter(new SamplePagerAdapter());
         indicator.setViewPager(viewpager);
 
-        mSnackbar = Snackbar.make(view.findViewById(R.id.coordinator_layout), "Snackbar",
-                Snackbar.LENGTH_SHORT);
+        mSnackbar = com.google.android.material.snackbar.Snackbar.make(view.findViewById(R.id.coordinator_layout), "Snackbar",
+                com.google.android.material.snackbar.Snackbar.LENGTH_SHORT);
 
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
