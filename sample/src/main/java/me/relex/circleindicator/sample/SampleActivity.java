@@ -14,19 +14,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
 import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
+import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
 
 public class SampleActivity extends AppCompatActivity {
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sample);
@@ -40,7 +44,8 @@ public class SampleActivity extends AppCompatActivity {
 
         getSupportFragmentManager().addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
-                    @Override public void onBackStackChanged() {
+                    @Override
+                    public void onBackStackChanged() {
                         int count = getSupportFragmentManager().getBackStackEntryCount();
                         ActionBar actionbar = getSupportActionBar();
                         if (actionbar != null) {
@@ -55,7 +60,8 @@ public class SampleActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
@@ -63,13 +69,15 @@ public class SampleActivity extends AppCompatActivity {
 
     public static class SampleListFragment extends Fragment {
 
-        @Nullable @Override
+        @Nullable
+        @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                @Nullable Bundle savedInstanceState) {
+                                 @Nullable Bundle savedInstanceState) {
             return new RecyclerView(getContext());
         }
 
-        @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             SampleListAdapter adapter = new SampleListAdapter();
 
             RecyclerView recyclerView = (RecyclerView) view;
@@ -79,6 +87,8 @@ public class SampleActivity extends AppCompatActivity {
             adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
             adapter.add(
                     new SampleInfo("Custom Animation", CustomAnimationFragment.class.getName()));
+            adapter.add(
+                    new SampleInfo("Recycler View", RecyclerViewFragment.class.getName()));
             adapter.add(new SampleInfo("Change Color", ChangeColorFragment.class.getName()));
             adapter.add(new SampleInfo("Dynamic Adapter", DynamicAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("Reset Adapter", ResetAdapterFragment.class.getName()));
@@ -91,21 +101,25 @@ public class SampleActivity extends AppCompatActivity {
 
             private final List<SampleInfo> mList = new ArrayList<>();
 
-            @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            @Override
+            public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 return ItemViewHolder.create(parent);
             }
 
-            @Override public void onBindViewHolder(final ItemViewHolder holder, int position) {
+            @Override
+            public void onBindViewHolder(final ItemViewHolder holder, int position) {
                 SampleInfo sample = mList.get(position);
                 holder.bindView(sample.title);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
                         navigateToFragment(mList.get(holder.getAdapterPosition()).fragmentName);
                     }
                 });
             }
 
-            @Override public int getItemCount() {
+            @Override
+            public int getItemCount() {
                 return mList.size();
             }
 
