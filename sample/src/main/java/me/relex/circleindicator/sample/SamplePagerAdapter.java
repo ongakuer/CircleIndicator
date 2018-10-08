@@ -1,7 +1,8 @@
 package me.relex.circleindicator.sample;
 
 import android.graphics.Color;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +26,16 @@ public class SamplePagerAdapter extends PagerAdapter {
         return mSize;
     }
 
-    @Override public boolean isViewFromObject(View view, Object object) {
+    @Override public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
-    @Override public void destroyItem(ViewGroup view, int position, Object object) {
+    @Override
+    public void destroyItem(@NonNull ViewGroup view, int position, @NonNull Object object) {
         view.removeView((View) object);
     }
 
-    @Override public Object instantiateItem(ViewGroup view, int position) {
+    @NonNull @Override public Object instantiateItem(@NonNull ViewGroup view, int position) {
         TextView textView = new TextView(view.getContext());
         textView.setText(String.valueOf(position + 1));
         textView.setBackgroundColor(0xff000000 | random.nextInt(0x00ffffff));

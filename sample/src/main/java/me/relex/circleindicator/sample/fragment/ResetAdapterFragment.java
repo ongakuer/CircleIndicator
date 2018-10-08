@@ -1,9 +1,10 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,14 @@ public class ResetAdapterFragment extends Fragment {
     private CircleIndicator mIndicator;
 
     @Nullable @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sample_reset_adapter, container, false);
     }
 
-    @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mViewpager = (ViewPager) view.findViewById(R.id.viewpager);
-        mIndicator = (CircleIndicator) view.findViewById(R.id.indicator);
+    @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mViewpager = view.findViewById(R.id.viewpager);
+        mIndicator = view.findViewById(R.id.indicator);
         mViewpager.setAdapter(new SamplePagerAdapter(5));
         mIndicator.setViewPager(mViewpager);
 

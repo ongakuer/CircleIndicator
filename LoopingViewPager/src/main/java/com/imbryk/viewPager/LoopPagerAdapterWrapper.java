@@ -16,16 +16,17 @@
 package com.imbryk.viewPager;
 
 import android.os.Parcelable;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class LoopPagerAdapterWrapper extends PagerAdapter {
 
-    private PagerAdapter mAdapter;
+    private final PagerAdapter mAdapter;
 
     private SparseArray<ToDestroy> mToDestroy = new SparseArray<>();
 
@@ -55,10 +56,14 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
     int toRealPosition(int position) {
         int realPosition = position;
         int realCount = getRealCount();
-        if (realCount == 0) return 0;
+        if (realCount == 0) {
+            return 0;
+        }
         if (mBoundaryLooping) {
             realPosition = (position - 1) % realCount;
-            if (realPosition < 0) realPosition += realCount;
+            if (realPosition < 0) {
+                realPosition += realCount;
+            }
         }
 
         return realPosition;
@@ -90,7 +95,7 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
         return mAdapter;
     }
 
-    @Override public Object instantiateItem(ViewGroup container, int position) {
+    @NonNull @Override public Object instantiateItem(@NonNull ViewGroup container, int position) {
         int realPosition = (mAdapter instanceof FragmentPagerAdapter
                 || mAdapter instanceof FragmentStatePagerAdapter) ? position
                 : toRealPosition(position);
@@ -105,7 +110,8 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
         return mAdapter.instantiateItem(container, realPosition);
     }
 
-    @Override public void destroyItem(ViewGroup container, int position, Object object) {
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         int realFirst = getRealFirstPosition();
         int realLast = getRealLastPosition();
         int realPosition = (mAdapter instanceof FragmentPagerAdapter
@@ -119,15 +125,15 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
         }
     }
 
-	/*
+    /*
      * Delegate rest of methods directly to the inner adapter.
-	 */
+     */
 
-    @Override public void finishUpdate(ViewGroup container) {
+    @Override public void finishUpdate(@NonNull ViewGroup container) {
         mAdapter.finishUpdate(container);
     }
 
-    @Override public boolean isViewFromObject(View view, Object object) {
+    @Override public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return mAdapter.isViewFromObject(view, object);
     }
 
@@ -139,27 +145,28 @@ public class LoopPagerAdapterWrapper extends PagerAdapter {
         return mAdapter.saveState();
     }
 
-    @Override public void startUpdate(ViewGroup container) {
+    @Override public void startUpdate(@NonNull ViewGroup container) {
         mAdapter.startUpdate(container);
     }
 
-    @Override public void setPrimaryItem(ViewGroup container, int position, Object object) {
+    @Override
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         mAdapter.setPrimaryItem(container, position, object);
     }
 
-	/*
+    /*
      * End delegation
-	 */
+     */
 
     /**
      * Container class for caching the boundary views
      */
     static class ToDestroy {
-        ViewGroup container;
-        int position;
-        Object object;
+        final ViewGroup container;
+        final int position;
+        final Object object;
 
-        public ToDestroy(ViewGroup container, int position, Object object) {
+        ToDestroy(ViewGroup container, int position, Object object) {
             this.container = container;
             this.position = position;
             this.object = object;

@@ -16,9 +16,10 @@
 package com.imbryk.viewPager;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class LoopViewPager extends ViewPager {
     /**
      * helper function which may be used when implementing FragmentPagerAdapter
      *
-     * @return (position-1)%count
+     * @return (position - 1)%count
      */
     public static int toRealPosition(int position, int count) {
         position = position - 1;
@@ -73,14 +74,14 @@ public class LoopViewPager extends ViewPager {
     }
 
     @Override public PagerAdapter getAdapter() {
-        return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
+        return mAdapter != null ? mAdapter.getRealAdapter() : null;
     }
 
     @Override public int getCurrentItem() {
         return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : 0;
     }
 
-    public void setCurrentItem(int item, boolean smoothScroll) {
+    @Override public void setCurrentItem(int item, boolean smoothScroll) {
         int realItem = mAdapter.toInnerPosition(item);
         super.setCurrentItem(realItem, smoothScroll);
     }
@@ -91,18 +92,14 @@ public class LoopViewPager extends ViewPager {
         }
     }
 
-    @Override public void setOnPageChangeListener(OnPageChangeListener listener) {
-        addOnPageChangeListener(listener);
-    }
-
-    @Override public void addOnPageChangeListener(OnPageChangeListener listener) {
+    @Override public void addOnPageChangeListener(@NonNull OnPageChangeListener listener) {
         if (mOnPageChangeListeners == null) {
             mOnPageChangeListeners = new ArrayList<>();
         }
         mOnPageChangeListeners.add(listener);
     }
 
-    @Override public void removeOnPageChangeListener(OnPageChangeListener listener) {
+    @Override public void removeOnPageChangeListener(@NonNull OnPageChangeListener listener) {
         if (mOnPageChangeListeners != null) {
             mOnPageChangeListeners.remove(listener);
         }
@@ -125,13 +122,11 @@ public class LoopViewPager extends ViewPager {
     }
 
     private void init(Context context) {
-        if (onPageChangeListener != null) {
-            super.removeOnPageChangeListener(onPageChangeListener);
-        }
+        super.removeOnPageChangeListener(onPageChangeListener);
         super.addOnPageChangeListener(onPageChangeListener);
     }
 
-    private OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
+    private final OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
         private float mPreviousOffset = -1;
         private float mPreviousPosition = -1;
 

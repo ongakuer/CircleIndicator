@@ -1,10 +1,11 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,14 @@ public class SnackbarBehaviorFragment extends Fragment {
     private Snackbar mSnackbar;
 
     @Nullable @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sample_snackbar_behavior, container, false);
     }
 
-    @Override public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-        ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
-        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+    @Override public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        ViewPager viewpager = view.findViewById(R.id.viewpager);
+        CircleIndicator indicator = view.findViewById(R.id.indicator);
         viewpager.setAdapter(new SamplePagerAdapter());
         indicator.setViewPager(viewpager);
 

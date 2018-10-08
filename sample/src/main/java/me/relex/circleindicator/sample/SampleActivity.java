@@ -1,15 +1,16 @@
 package me.relex.circleindicator.sample;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class SampleActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -64,12 +65,13 @@ public class SampleActivity extends AppCompatActivity {
     public static class SampleListFragment extends Fragment {
 
         @Nullable @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                 @Nullable Bundle savedInstanceState) {
             return new RecyclerView(getContext());
         }
 
-        @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             SampleListAdapter adapter = new SampleListAdapter();
 
             RecyclerView recyclerView = (RecyclerView) view;
@@ -83,19 +85,21 @@ public class SampleActivity extends AppCompatActivity {
             adapter.add(new SampleInfo("Dynamic Adapter", DynamicAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("Reset Adapter", ResetAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("LoopViewPager", LoopViewPagerFragment.class.getName()));
-            adapter.add(new SampleInfo("Snackbar Behavior",
-                    SnackbarBehaviorFragment.class.getName()));
+            adapter.add(
+                    new SampleInfo("Snackbar Behavior", SnackbarBehaviorFragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
             private final List<SampleInfo> mList = new ArrayList<>();
 
-            @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            @NonNull @Override
+            public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 return ItemViewHolder.create(parent);
             }
 
-            @Override public void onBindViewHolder(final ItemViewHolder holder, int position) {
+            @Override
+            public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
                 SampleInfo sample = mList.get(position);
                 holder.bindView(sample.title);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -123,33 +127,35 @@ public class SampleActivity extends AppCompatActivity {
         private void navigateToFragment(String fragmentName) {
             Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                     android.R.anim.fade_in, android.R.anim.fade_out);
+
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.addToBackStack(fragmentName);
             fragmentTransaction.commit();
         }
 
         private static class ItemViewHolder extends RecyclerView.ViewHolder {
-            public ItemViewHolder(View itemView) {
+            ItemViewHolder(View itemView) {
                 super(itemView);
             }
 
-            public void bindView(String title) {
+            void bindView(String title) {
                 ((TextView) itemView).setText(title);
             }
 
-            public static ItemViewHolder create(ViewGroup viewGroup) {
+            static ItemViewHolder create(ViewGroup viewGroup) {
                 return new ItemViewHolder(LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.item_view, viewGroup, false));
             }
         }
 
         private static class SampleInfo {
-            public String title;
-            public String fragmentName;
+            public final String title;
+            final String fragmentName;
 
-            public SampleInfo(String title, String fragmentName) {
+            SampleInfo(String title, String fragmentName) {
                 this.title = title;
                 this.fragmentName = fragmentName;
             }
