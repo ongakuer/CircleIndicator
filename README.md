@@ -8,25 +8,36 @@ A lightweight viewpager indicator like in nexus 5 launcher
 
 Gradle
 ------------
+
+
+###### AndroidX
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.2.2@aar'
+    implementation 'me.relex:circleindicator:2.0.0'
 }
 ```
+
+###### Android Support Library
+```groovy
+dependencies {
+    compile 'me.relex:circleindicator:1.2.2'
+}
+```
+
 
 Usage
 --------
 ```xml
-	<me.relex.circleindicator.CircleIndicator
-		android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+<me.relex.circleindicator.CircleIndicator
+	android:id="@+id/indicator"
+	android:layout_width="match_parent"
+	android:layout_height="48dp"/>
 ```
 ```java
-    ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
-    CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
-    viewpager.setAdapter(mPageAdapter);
-    indicator.setViewPager(viewpager);
+ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+viewpager.setAdapter(mPageAdapter);
+indicator.setViewPager(viewpager);
 ```
 
 ##### Properties:
