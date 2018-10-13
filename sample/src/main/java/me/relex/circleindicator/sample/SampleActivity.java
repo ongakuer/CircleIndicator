@@ -1,20 +1,20 @@
 package me.relex.circleindicator.sample;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
@@ -22,6 +22,7 @@ import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
 import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
+import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
 
@@ -87,6 +88,8 @@ public class SampleActivity extends AppCompatActivity {
             adapter.add(new SampleInfo("LoopViewPager", LoopViewPagerFragment.class.getName()));
             adapter.add(
                     new SampleInfo("Snackbar Behavior", SnackbarBehaviorFragment.class.getName()));
+            adapter.add(new SampleInfo("RecyclerView (CircleIndicator2)",
+                    RecyclerViewFragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {

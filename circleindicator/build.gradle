@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version = "2.0.0"
+version = "2.1.0"
 
 android {
     compileSdkVersion 28
@@ -8,7 +8,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 200
+        versionCode 210
         versionName version
     }
 
@@ -22,7 +22,8 @@ android {
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.0.0'
-    implementation 'androidx.viewpager:viewpager:1.0.0'
+    compileOnly 'androidx.viewpager:viewpager:1.0.0'
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'com.google.android.material:material:1.0.0'
 }
 

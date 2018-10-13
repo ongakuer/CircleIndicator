@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.Config;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SamplePagerAdapter;
 
@@ -33,7 +34,7 @@ public class CustomAnimationFragment extends Fragment {
         ViewPager viewpager = view.findViewById(R.id.viewpager);
 
         CircleIndicator indicator = view.findViewById(R.id.indicator);
-        CircleIndicator.Config config = new CircleIndicator.Config().width(indicatorWidth)
+        Config config = new Config.Builder().width(indicatorWidth)
                 .height(indicatorHeight)
                 .margin(indicatorMargin)
                 .animator(R.animator.indicator_animator)

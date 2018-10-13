@@ -27,6 +27,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation project(':circleindicator')
-    implementation project(':LoopingViewPager')
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+
+    api project(':circleindicator')
+    api project(':LoopingViewPager')
 }
