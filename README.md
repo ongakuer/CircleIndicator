@@ -43,6 +43,7 @@ viewpager.setAdapter(adapter);
 CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
 indicator.setViewPager(viewpager);
 
+// optional
 adapter.registerDataSetObserver(indicator.getDataSetObserver());
 ```
 
@@ -66,6 +67,7 @@ pagerSnapHelper.attachToRecyclerView(recyclerView);
 CircleIndicator2 indicator = view.findViewById(R.id.indicator);
 indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
 
+// optional
 adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 ```
 
