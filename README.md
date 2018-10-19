@@ -1,6 +1,6 @@
 CircleIndicator
 ===============
-A lightweight viewpager indicator like in nexus 5 launcher 
+A lightweight indicator like in nexus 5 launcher 
 
 [ ![Download](https://api.bintray.com/packages/ongakuer/maven/CircleIndicator/images/download.svg) ](https://bintray.com/ongakuer/maven/CircleIndicator/_latestVersion)
 
