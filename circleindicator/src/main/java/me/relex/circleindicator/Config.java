@@ -1,5 +1,6 @@
 package me.relex.circleindicator;
 
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import androidx.annotation.AnimatorRes;
@@ -14,6 +15,8 @@ public class Config {
     @AnimatorRes int animatorReverseResId = 0;
     @DrawableRes int backgroundResId = R.drawable.white_radius;
     @DrawableRes int unselectedBackgroundId;
+    Drawable backgroundDrawable;
+    Drawable unselectedBackgroundDrawable;
     int orientation = LinearLayout.HORIZONTAL;
     int gravity = Gravity.CENTER;
 
@@ -50,6 +53,16 @@ public class Config {
 
         public Builder animatorReverse(@AnimatorRes int animatorReverseResId) {
             mConfig.animatorReverseResId = animatorReverseResId;
+            return this;
+        }
+
+        public Builder drawable(Drawable background) {
+            mConfig.backgroundDrawable = background;
+            return this;
+        }
+
+        public Builder drawableUnselected(Drawable unselectedBackground) {
+            mConfig.unselectedBackgroundDrawable = unselectedBackground;
             return this;
         }
 
