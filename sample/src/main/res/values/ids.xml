@@ -13,5 +13,6 @@
     <item type="id" name="add"/>
     <item type="id" name="remove"/>
     <item type="id" name="button"/>
+    <item type="id" name="change_orientation"/>
 
 </resources>

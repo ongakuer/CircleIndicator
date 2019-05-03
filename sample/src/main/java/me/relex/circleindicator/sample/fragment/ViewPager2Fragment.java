@@ -30,12 +30,17 @@ public class ViewPager2Fragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewPager2 recyclerView = view.findViewById(R.id.recycler_view);
-
-        recyclerView.setAdapter(new SampleRecyclerAdapter(5));
+        final ViewPager2 viewPager2 = view.findViewById(R.id.recycler_view);
+        viewPager2.setAdapter(new SampleRecyclerAdapter(5));
+        view.findViewById(R.id.change_orientation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager2.setOrientation(viewPager2.getOrientation() == ViewPager2.ORIENTATION_VERTICAL ? ViewPager2.ORIENTATION_HORIZONTAL : ViewPager2.ORIENTATION_VERTICAL);
+            }
+        });
 
         // CircleIndicator2 for ViewPager2
         CircleIndicatorPager2 indicator = view.findViewById(R.id.indicator);
-        indicator.setViewPager(recyclerView);
+        indicator.setViewPager(viewPager2);
     }
 }

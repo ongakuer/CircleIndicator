@@ -15,4 +15,12 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="48dp"/>
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/change_orientation"
+        style="@style/DefaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/change_orientation"/>
 </FrameLayout>
