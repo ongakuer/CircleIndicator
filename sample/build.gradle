@@ -32,5 +32,4 @@ dependencies {
 
     api project(':circleindicator')
     api project(':LoopingViewPager')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

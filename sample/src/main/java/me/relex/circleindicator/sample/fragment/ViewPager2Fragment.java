@@ -34,7 +34,7 @@ public class ViewPager2Fragment extends Fragment{
 
         recyclerView.setAdapter(new SampleRecyclerAdapter(5));
 
-        // CircleIndicator2 for RecyclerView
+        // CircleIndicator2 for ViewPager2
         CircleIndicatorPager2 indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(recyclerView);
     }
