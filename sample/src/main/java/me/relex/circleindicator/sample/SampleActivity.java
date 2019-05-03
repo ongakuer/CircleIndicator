@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
 import java.util.ArrayList;
 import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
@@ -25,6 +27,7 @@ import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
+import me.relex.circleindicator.sample.fragment.ViewPager2Fragment;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -90,6 +93,7 @@ public class SampleActivity extends AppCompatActivity {
                     new SampleInfo("Snackbar Behavior", SnackbarBehaviorFragment.class.getName()));
             adapter.add(new SampleInfo("RecyclerView (CircleIndicator2)",
                     RecyclerViewFragment.class.getName()));
+            adapter.add(new SampleInfo("ViewPager2", ViewPager2Fragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
