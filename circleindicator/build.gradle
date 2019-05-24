@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.annotation:annotation:1.0.2'
     compileOnly 'androidx.viewpager:viewpager:1.0.0'
     compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'com.google.android.material:material:1.0.0'

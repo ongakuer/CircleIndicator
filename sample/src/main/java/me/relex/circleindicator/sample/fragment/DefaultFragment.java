@@ -1,16 +1,16 @@
 package me.relex.circleindicator.sample.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.sample.SamplePagerAdapter;
 import me.relex.circleindicator.sample.R;
+import me.relex.circleindicator.sample.SamplePagerAdapter;
 
 public class DefaultFragment extends Fragment {
 
