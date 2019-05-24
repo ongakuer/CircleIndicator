@@ -1,5 +1,7 @@
 ChangeLog
 --------
+##### 2.X
+* [Releases](https://github.com/ongakuer/CircleIndicator/releases)
 
 ##### 1.2.2   
 * Fix bug ([#69](https://github.com/ongakuer/CircleIndicator/issues/69))

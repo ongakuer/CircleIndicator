@@ -13,7 +13,7 @@ Gradle
 ###### AndroidX
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:2.1.0'
+    implementation 'me.relex:circleindicator:2.1.1'
 }
 ```
 
@@ -71,6 +71,28 @@ indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
 adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 ```
 
+
+###### ViewPager2
+
+```xml
+<me.relex.circleindicator.CircleIndicator3
+	android:id="@+id/indicator"
+	android:layout_width="match_parent"
+	android:layout_height="48dp"/>
+```
+```java
+
+ViewPager2 viewpager = view.findViewById(R.id.viewpager);
+viewpager.setAdapter(mAdapter);
+
+CircleIndicator3 indicator = view.findViewById(R.id.indicator);
+indicator.setViewPager(viewpager);
+
+// optional
+adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
+```
+
+
 ##### Properties:
 
 * `app:ci_width`
@@ -82,6 +104,3 @@ adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 * `app:ci_animator_reverse`
 * `app:ci_orientation` (default:horizontal)
 * `app:ci_gravity` (default:center)
-
-
-
