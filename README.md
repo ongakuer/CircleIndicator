@@ -1,6 +1,6 @@
 CircleIndicator
 ===============
-A lightweight viewpager indicator like in nexus 5 launcher 
+A lightweight indicator like in nexus 5 launcher 
 
 [ ![Download](https://api.bintray.com/packages/ongakuer/maven/CircleIndicator/images/download.svg) ](https://bintray.com/ongakuer/maven/CircleIndicator/_latestVersion)
 
@@ -13,7 +13,7 @@ Gradle
 ###### AndroidX
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:2.0.0'
+    implementation 'me.relex:circleindicator:2.1.0'
 }
 ```
 
@@ -27,6 +27,9 @@ dependencies {
 
 Usage
 --------
+
+###### ViewPager
+
 ```xml
 <me.relex.circleindicator.CircleIndicator
 	android:id="@+id/indicator"
@@ -35,9 +38,37 @@ Usage
 ```
 ```java
 ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+viewpager.setAdapter(adapter);
+
 CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
-viewpager.setAdapter(mPageAdapter);
 indicator.setViewPager(viewpager);
+
+// optional
+adapter.registerDataSetObserver(indicator.getDataSetObserver());
+```
+
+
+###### RecyclerView
+
+```xml
+<me.relex.circleindicator.CircleIndicator2
+	android:id="@+id/indicator"
+	android:layout_width="match_parent"
+	android:layout_height="48dp"/>
+```
+```java
+RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+recyclerView.setLayoutManager(layoutManager);
+recyclerView.setAdapter(adapter);
+
+PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+pagerSnapHelper.attachToRecyclerView(recyclerView);
+
+CircleIndicator2 indicator = view.findViewById(R.id.indicator);
+indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
+
+// optional
+adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 ```
 
 ##### Properties:
