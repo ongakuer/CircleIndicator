@@ -18,13 +18,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'androidx.annotation:annotation:1.1.0-rc01'
     compileOnly 'androidx.viewpager:viewpager:1.0.0'
     compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'com.google.android.material:material:1.0.0'
+    compileOnly 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
 }
 
 //apply from: "upload-jcenter.gradle"

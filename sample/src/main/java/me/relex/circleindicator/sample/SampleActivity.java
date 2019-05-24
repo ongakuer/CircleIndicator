@@ -11,7 +11,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +24,7 @@ import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
+import me.relex.circleindicator.sample.fragment.ViewPager2Fragment;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -35,32 +35,26 @@ public class SampleActivity extends AppCompatActivity {
 
         initToolbar();
 
-        Fragment demoFragment = Fragment.instantiate(this, SampleListFragment.class.getName());
+        Fragment demoFragment = getSupportFragmentManager().getFragmentFactory()
+                .instantiate(getClassLoader(), SampleListFragment.class.getName());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment);
         fragmentTransaction.commit();
 
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-                    @Override public void onBackStackChanged() {
-                        int count = getSupportFragmentManager().getBackStackEntryCount();
-                        ActionBar actionbar = getSupportActionBar();
-                        if (actionbar != null) {
-                            actionbar.setDisplayHomeAsUpEnabled(count > 0);
-                            actionbar.setDisplayShowHomeEnabled(count > 0);
-                        }
-                    }
-                });
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+            ActionBar actionbar = getSupportActionBar();
+            if (actionbar != null) {
+                actionbar.setDisplayHomeAsUpEnabled(count > 0);
+                actionbar.setDisplayShowHomeEnabled(count > 0);
+            }
+        });
     }
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     public static class SampleListFragment extends Fragment {
@@ -90,6 +84,8 @@ public class SampleActivity extends AppCompatActivity {
                     new SampleInfo("Snackbar Behavior", SnackbarBehaviorFragment.class.getName()));
             adapter.add(new SampleInfo("RecyclerView (CircleIndicator2)",
                     RecyclerViewFragment.class.getName()));
+            adapter.add(new SampleInfo("AndroidX ViewPager2 (CircleIndicator3)",
+                    ViewPager2Fragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
@@ -128,12 +124,12 @@ public class SampleActivity extends AppCompatActivity {
         }
 
         private void navigateToFragment(String fragmentName) {
-            Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
+            Fragment fragment = getFragmentManager().getFragmentFactory()
+                    .instantiate(getContext().getClassLoader(), fragmentName);
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                     android.R.anim.fade_in, android.R.anim.fade_out);
-
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.addToBackStack(fragmentName);
             fragmentTransaction.commit();

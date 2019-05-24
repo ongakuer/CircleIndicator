@@ -7,42 +7,33 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import me.relex.circleindicator.CircleIndicator2;
+import androidx.viewpager2.widget.ViewPager2;
+import me.relex.circleindicator.CircleIndicator3;
 import me.relex.circleindicator.sample.R;
 import me.relex.circleindicator.sample.SampleRecyclerAdapter;
 
-public class RecyclerViewFragment extends Fragment {
+public class ViewPager2Fragment extends Fragment {
 
     private SampleRecyclerAdapter mAdapter;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sample_recycler_view, container, false);
+        return inflater.inflate(R.layout.fragment_sample_viewpager2, container, false);
     }
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mAdapter = new SampleRecyclerAdapter(5);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        ViewPager2 viewpager = view.findViewById(R.id.viewpager);
+        viewpager.setAdapter(mAdapter);
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
+        // CircleIndicator3 for RecyclerView
+        CircleIndicator3 indicator = view.findViewById(R.id.indicator);
+        indicator.setViewPager(viewpager);
 
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(recyclerView);
-
-        // CircleIndicator2 for RecyclerView
-        CircleIndicator2 indicator = view.findViewById(R.id.indicator);
-        indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
-
-        // Scroll To Position
-        layoutManager.scrollToPosition(2);
+        // CurrentItem
+        viewpager.setCurrentItem(2,false);
 
         // Observe Data Change
         mAdapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
