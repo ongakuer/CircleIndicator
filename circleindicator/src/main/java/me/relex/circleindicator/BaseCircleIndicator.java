@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 class BaseCircleIndicator extends LinearLayout {
 
@@ -31,6 +32,8 @@ class BaseCircleIndicator extends LinearLayout {
     protected Animator mImmediateAnimatorIn;
 
     protected int mLastPosition = -1;
+
+    @Nullable private IndicatorCreatedListener mIndicatorCreatedListener;
 
     public BaseCircleIndicator(Context context) {
         super(context);
@@ -114,6 +117,21 @@ class BaseCircleIndicator extends LinearLayout {
         setGravity(config.gravity >= 0 ? config.gravity : Gravity.CENTER);
     }
 
+    public interface IndicatorCreatedListener {
+        /**
+         * IndicatorCreatedListener
+         *
+         * @param view internal indicator view
+         * @param position position
+         */
+        void onIndicatorCreated(View view, int position);
+    }
+
+    public void setIndicatorCreatedListener(
+            @Nullable IndicatorCreatedListener indicatorCreatedListener) {
+        mIndicatorCreatedListener = indicatorCreatedListener;
+    }
+
     protected Animator createAnimatorOut(Config config) {
         return AnimatorInflater.loadAnimator(getContext(), config.animatorResId);
     }
@@ -131,17 +149,22 @@ class BaseCircleIndicator extends LinearLayout {
 
     protected void createIndicators(int count, int currentPosition) {
         int orientation = getOrientation();
+        View indicator;
         for (int i = 0; i < count; i++) {
             if (currentPosition == i) {
-                addIndicator(orientation, mIndicatorBackgroundResId, mImmediateAnimatorOut);
+                indicator =
+                        addIndicator(orientation, mIndicatorBackgroundResId, mImmediateAnimatorOut);
             } else {
-                addIndicator(orientation, mIndicatorUnselectedBackgroundResId,
+                indicator = addIndicator(orientation, mIndicatorUnselectedBackgroundResId,
                         mImmediateAnimatorIn);
+            }
+            if (mIndicatorCreatedListener != null) {
+                mIndicatorCreatedListener.onIndicatorCreated(indicator, i);
             }
         }
     }
 
-    protected void addIndicator(int orientation, @DrawableRes int backgroundDrawableId,
+    protected View addIndicator(int orientation, @DrawableRes int backgroundDrawableId,
             Animator animator) {
         if (animator.isRunning()) {
             animator.end();
@@ -163,6 +186,8 @@ class BaseCircleIndicator extends LinearLayout {
         indicator.setLayoutParams(lp);
         animator.setTarget(indicator);
         animator.start();
+
+        return indicator;
     }
 
     protected void internalPageSelected(int position) {
