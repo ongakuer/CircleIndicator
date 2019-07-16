@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
+import java.lang.ref.WeakReference;
 
 public class CircleIndicator extends LinearLayout {
 
@@ -104,9 +104,9 @@ public class CircleIndicator extends LinearLayout {
     }
 
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
-            @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
-            @DrawableRes int indicatorBackgroundId,
-            @DrawableRes int indicatorUnselectedBackgroundId) {
+                                   @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
+                                   @DrawableRes int indicatorBackgroundId,
+                                   @DrawableRes int indicatorUnselectedBackgroundId) {
 
         mIndicatorWidth = indicatorWidth;
         mIndicatorHeight = indicatorHeight;
@@ -170,78 +170,93 @@ public class CircleIndicator extends LinearLayout {
         }
     }
 
-    private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener mInternalPageChangeListener =
+            new ViewPager.OnPageChangeListener() {
 
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                }
 
-        @Override public void onPageSelected(int position) {
+                @Override
+                public void onPageSelected(int position) {
 
-            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
-                return;
-            }
+                    if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
+                        return;
+                    }
 
-            if (mAnimatorIn.isRunning()) {
-                mAnimatorIn.end();
-                mAnimatorIn.cancel();
-            }
+                    if (mAnimatorIn.isRunning()) {
+                        mAnimatorIn.end();
+                        mAnimatorIn.cancel();
+                    }
 
-            if (mAnimatorOut.isRunning()) {
-                mAnimatorOut.end();
-                mAnimatorOut.cancel();
-            }
+                    if (mAnimatorOut.isRunning()) {
+                        mAnimatorOut.end();
+                        mAnimatorOut.cancel();
+                    }
 
-            View currentIndicator;
-            if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
-                currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
-                mAnimatorIn.setTarget(currentIndicator);
-                mAnimatorIn.start();
-            }
+                    View currentIndicator;
+                    if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
+                        currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+                        mAnimatorIn.setTarget(currentIndicator);
+                        mAnimatorIn.start();
+                    }
 
-            View selectedIndicator = getChildAt(position);
-            if (selectedIndicator != null) {
-                selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-                mAnimatorOut.setTarget(selectedIndicator);
-                mAnimatorOut.start();
-            }
-            mLastPosition = position;
-        }
+                    View selectedIndicator = getChildAt(position);
+                    if (selectedIndicator != null) {
+                        selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+                        mAnimatorOut.setTarget(selectedIndicator);
+                        mAnimatorOut.start();
+                    }
+                    mLastPosition = position;
+                }
 
-        @Override public void onPageScrollStateChanged(int state) {
-        }
-    };
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                }
+            };
 
     public DataSetObserver getDataSetObserver() {
         return mInternalDataSetObserver;
     }
 
-    private DataSetObserver mInternalDataSetObserver = new DataSetObserver() {
-        @Override public void onChanged() {
+    private static class InternalDataSetObserver extends DataSetObserver {
+        private WeakReference<CircleIndicator> circleIndicatorRef;
+
+        InternalDataSetObserver(CircleIndicator circleIndicator) {
+            circleIndicatorRef = new WeakReference<>(circleIndicator);
+        }
+
+        @Override
+        public void onChanged() {
             super.onChanged();
-            if (mViewpager == null) {
+            CircleIndicator circleIndicator = circleIndicatorRef.get();
+            if (circleIndicator == null || circleIndicator.mViewpager == null) {
                 return;
             }
 
-            int newCount = mViewpager.getAdapter().getCount();
-            int currentCount = getChildCount();
+            ViewPager viewPager = circleIndicator.mViewpager;
+            int newCount = viewPager.getAdapter().getCount();
+            int currentCount = circleIndicator.getChildCount();
 
             if (newCount == currentCount) {  // No change
                 return;
-            } else if (mLastPosition < newCount) {
-                mLastPosition = mViewpager.getCurrentItem();
+            } else if (circleIndicator.mLastPosition < newCount) {
+                circleIndicator.mLastPosition = viewPager.getCurrentItem();
             } else {
-                mLastPosition = -1;
+                circleIndicator.mLastPosition = -1;
             }
 
-            createIndicators();
+            circleIndicator.createIndicators();
         }
-    };
+    }
+
+    private DataSetObserver mInternalDataSetObserver = new InternalDataSetObserver(this);
 
     /**
      * @deprecated User ViewPager addOnPageChangeListener
      */
-    @Deprecated public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    @Deprecated
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         if (mViewpager == null) {
             throw new NullPointerException("can not find Viewpager , setViewPager first");
         }
@@ -269,7 +284,7 @@ public class CircleIndicator extends LinearLayout {
     }
 
     private void addIndicator(int orientation, @DrawableRes int backgroundDrawableId,
-            Animator animator) {
+                              Animator animator) {
         if (animator.isRunning()) {
             animator.end();
             animator.cancel();
@@ -278,7 +293,7 @@ public class CircleIndicator extends LinearLayout {
         View Indicator = new View(getContext());
         Indicator.setBackgroundResource(backgroundDrawableId);
         addView(Indicator, mIndicatorWidth, mIndicatorHeight);
-        LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) Indicator.getLayoutParams();
 
         if (orientation == HORIZONTAL) {
             lp.leftMargin = mIndicatorMargin;
@@ -294,8 +309,9 @@ public class CircleIndicator extends LinearLayout {
         animator.start();
     }
 
-    private class ReverseInterpolator implements Interpolator {
-        @Override public float getInterpolation(float value) {
+    private static class ReverseInterpolator implements Interpolator {
+        @Override
+        public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
         }
     }
