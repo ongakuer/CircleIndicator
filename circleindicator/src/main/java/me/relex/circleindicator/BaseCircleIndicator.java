@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 
 class BaseCircleIndicator extends LinearLayout {
@@ -148,46 +147,65 @@ class BaseCircleIndicator extends LinearLayout {
     }
 
     public void createIndicators(int count, int currentPosition) {
-        int orientation = getOrientation();
+        if (mImmediateAnimatorOut.isRunning()) {
+            mImmediateAnimatorOut.end();
+            mImmediateAnimatorOut.cancel();
+        }
+
+        if (mImmediateAnimatorIn.isRunning()) {
+            mImmediateAnimatorIn.end();
+            mImmediateAnimatorIn.cancel();
+        }
+
+        // Diff View
+        int childViewCount = getChildCount();
+        if (count < childViewCount) {
+            removeViews(count, childViewCount - count);
+        } else if (count > childViewCount) {
+            int addCount = count - childViewCount;
+            int orientation = getOrientation();
+            for (int i = 0; i < addCount; i++) {
+                addIndicator(orientation);
+            }
+        }
+
+        // Bind Style
         View indicator;
         for (int i = 0; i < count; i++) {
+            indicator = getChildAt(i);
             if (currentPosition == i) {
-                indicator =
-                        addIndicator(orientation, mIndicatorBackgroundResId, mImmediateAnimatorOut);
+                indicator.setBackgroundResource(mIndicatorBackgroundResId);
+                mImmediateAnimatorOut.setTarget(indicator);
+                mImmediateAnimatorOut.start();
+                mImmediateAnimatorOut.end();
             } else {
-                indicator = addIndicator(orientation, mIndicatorUnselectedBackgroundResId,
-                        mImmediateAnimatorIn);
+                indicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+                mImmediateAnimatorIn.setTarget(indicator);
+                mImmediateAnimatorIn.start();
+                mImmediateAnimatorIn.end();
             }
+
             if (mIndicatorCreatedListener != null) {
                 mIndicatorCreatedListener.onIndicatorCreated(indicator, i);
             }
         }
+
+        mLastPosition = currentPosition;
     }
 
-    protected View addIndicator(int orientation, @DrawableRes int backgroundDrawableId,
-            Animator animator) {
-        if (animator.isRunning()) {
-            animator.end();
-            animator.cancel();
-        }
+    protected void addIndicator(int orientation) {
         View indicator = new View(getContext());
-        indicator.setBackgroundResource(backgroundDrawableId);
-        addView(indicator, mIndicatorWidth, mIndicatorHeight);
-        LayoutParams lp = (LayoutParams) indicator.getLayoutParams();
-
+        final LayoutParams params = generateDefaultLayoutParams();
+        params.width = mIndicatorWidth;
+        params.height = mIndicatorHeight;
         if (orientation == HORIZONTAL) {
-            lp.leftMargin = mIndicatorMargin;
-            lp.rightMargin = mIndicatorMargin;
+            params.leftMargin = mIndicatorMargin;
+            params.rightMargin = mIndicatorMargin;
         } else {
-            lp.topMargin = mIndicatorMargin;
-            lp.bottomMargin = mIndicatorMargin;
+            params.topMargin = mIndicatorMargin;
+            params.bottomMargin = mIndicatorMargin;
         }
-
-        indicator.setLayoutParams(lp);
-        animator.setTarget(indicator);
-        animator.start();
-
-        return indicator;
+        addView(indicator, params);
     }
 
     public void animatePageSelected(int position) {

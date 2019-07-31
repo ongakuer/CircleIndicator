@@ -45,11 +45,12 @@ public class CircleIndicator3 extends BaseCircleIndicator {
     }
 
     private void createIndicators() {
-        removeAllViews();
         RecyclerView.Adapter adapter = mViewpager.getAdapter();
         int count;
-        if (adapter == null || (count = adapter.getItemCount()) <= 0) {
-            return;
+        if (adapter == null) {
+            count = 0;
+        } else {
+            count = adapter.getItemCount();
         }
         createIndicators(count, mViewpager.getCurrentItem());
     }
