@@ -13,14 +13,14 @@ Gradle
 ###### AndroidX
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:2.1.3'
+    implementation 'me.relex:circleindicator:2.1.4'
 }
 ```
 
 ###### Android Support Library
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:1.3.0'
+    implementation 'me.relex:circleindicator:1.3.2'
 }
 ```
 
