@@ -13,14 +13,14 @@ Gradle
 ###### AndroidX
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:2.1.2'
+    implementation 'me.relex:circleindicator:2.1.3'
 }
 ```
 
 ###### Android Support Library
 ```groovy
 dependencies {
-    implementation 'me.relex:circleindicator:1.2.2'
+    implementation 'me.relex:circleindicator:1.3.0'
 }
 ```
 
@@ -28,7 +28,7 @@ dependencies {
 Usage
 --------
 
-###### ViewPager
+###### ViewPager (CircleIndicator)
 
 ```xml
 <me.relex.circleindicator.CircleIndicator
@@ -48,7 +48,7 @@ adapter.registerDataSetObserver(indicator.getDataSetObserver());
 ```
 
 
-###### RecyclerView
+###### RecyclerView (CircleIndicator2)
 
 ```xml
 <me.relex.circleindicator.CircleIndicator2
@@ -72,7 +72,7 @@ adapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 ```
 
 
-###### ViewPager2
+###### ViewPager2 (CircleIndicator3)
 
 ```xml
 <me.relex.circleindicator.CircleIndicator3
