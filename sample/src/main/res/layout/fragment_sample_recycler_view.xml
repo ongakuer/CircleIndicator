@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -16,7 +16,7 @@
         android:layout_marginBottom="48dp"/>
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@id/add"
         style="@style/DefaultButton"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_gravity="right"
         android:text="@string/add"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@id/remove"
         style="@style/DefaultButton"
         android:layout_width="wrap_content"

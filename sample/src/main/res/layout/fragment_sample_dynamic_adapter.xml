@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
+    <android.support.v4.view.ViewPager
         android:id="@id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -15,7 +15,7 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="48dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@id/add"
         style="@style/DefaultButton"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_gravity="right"
         android:text="@string/add"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <android.support.v7.widget.AppCompatButton
         android:id="@id/remove"
         style="@style/DefaultButton"
         android:layout_width="wrap_content"

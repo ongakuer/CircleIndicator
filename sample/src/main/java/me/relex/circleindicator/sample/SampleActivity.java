@@ -1,19 +1,19 @@
 package me.relex.circleindicator.sample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
@@ -25,7 +25,6 @@ import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
-import me.relex.circleindicator.sample.fragment.ViewPager2Fragment;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -36,8 +35,7 @@ public class SampleActivity extends AppCompatActivity {
 
         initToolbar();
 
-        Fragment demoFragment = getSupportFragmentManager().getFragmentFactory()
-                .instantiate(getClassLoader(), SampleListFragment.class.getName());
+        Fragment demoFragment = Fragment.instantiate(this, SampleListFragment.class.getName());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, demoFragment);
         fragmentTransaction.commit();
@@ -87,8 +85,6 @@ public class SampleActivity extends AppCompatActivity {
                     RecyclerViewFragment.class.getName()));
             adapter.add(new SampleInfo("LoopRecyclerView (CircleIndicator2) and Manual control",
                     LoopRecyclerViewFragment.class.getName()));
-            adapter.add(new SampleInfo("AndroidX ViewPager2 (CircleIndicator3)",
-                    ViewPager2Fragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
@@ -127,8 +123,7 @@ public class SampleActivity extends AppCompatActivity {
         }
 
         private void navigateToFragment(String fragmentName) {
-            Fragment fragment = getFragmentManager().getFragmentFactory()
-                    .instantiate(getContext().getClassLoader(), fragmentName);
+            Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
             fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,

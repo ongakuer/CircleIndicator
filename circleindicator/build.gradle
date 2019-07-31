@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version = "2.1.3"
+version = "1.3.0"
 
 android {
     compileSdkVersion 28
@@ -8,7 +8,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 213
+        versionCode 130
         versionName version
     }
 
@@ -25,11 +25,10 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.1.0'
-    compileOnly 'androidx.viewpager:viewpager:1.0.0'
-    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
-    compileOnly 'com.google.android.material:material:1.0.0'
-    compileOnly 'androidx.viewpager2:viewpager2:1.0.0-beta02'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    compileOnly 'com.android.support:appcompat-v7:28.0.0'
+    compileOnly 'com.android.support:recyclerview-v7:28.0.0'
+    compileOnly 'com.android.support:design:28.0.0'
 }
 
 //apply from: "upload-jcenter.gradle"
