@@ -77,11 +77,7 @@ public class CircleIndicator2 extends BaseCircleIndicator {
                     if (position == RecyclerView.NO_POSITION) {
                         return;
                     }
-                    if (mLastPosition == position) {
-                        return;
-                    }
-                    internalPageSelected(position);
-                    mLastPosition = position;
+                    animatePageSelected(position);
                 }
             };
 

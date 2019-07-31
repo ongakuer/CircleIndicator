@@ -62,8 +62,7 @@ public class CircleIndicator3 extends BaseCircleIndicator {
                             || mViewpager.getAdapter().getItemCount() <= 0) {
                         return;
                     }
-                    internalPageSelected(position);
-                    mLastPosition = position;
+                    animatePageSelected(position);
                 }
             };
 

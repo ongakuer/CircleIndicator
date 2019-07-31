@@ -67,8 +67,7 @@ public class CircleIndicator extends BaseCircleIndicator {
                             || mViewpager.getAdapter().getCount() <= 0) {
                         return;
                     }
-                    internalPageSelected(position);
-                    mLastPosition = position;
+                    animatePageSelected(position);
                 }
 
                 @Override public void onPageScrollStateChanged(int state) {

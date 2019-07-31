@@ -12,7 +12,7 @@ import java.util.Random;
 public class SampleRecyclerAdapter
         extends RecyclerView.Adapter<SampleRecyclerAdapter.TextViewHolder> {
 
-    private int mCount;
+    protected int mCount;
 
     public SampleRecyclerAdapter(int count) {
         mCount = count;

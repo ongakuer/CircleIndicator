@@ -147,7 +147,7 @@ class BaseCircleIndicator extends LinearLayout {
         return animatorIn;
     }
 
-    protected void createIndicators(int count, int currentPosition) {
+    public void createIndicators(int count, int currentPosition) {
         int orientation = getOrientation();
         View indicator;
         for (int i = 0; i < count; i++) {
@@ -190,7 +190,11 @@ class BaseCircleIndicator extends LinearLayout {
         return indicator;
     }
 
-    protected void internalPageSelected(int position) {
+    public void animatePageSelected(int position) {
+
+        if (mLastPosition == position) {
+            return;
+        }
 
         if (mAnimatorIn.isRunning()) {
             mAnimatorIn.end();
@@ -215,6 +219,7 @@ class BaseCircleIndicator extends LinearLayout {
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
         }
+        mLastPosition = position;
     }
 
     protected class ReverseInterpolator implements Interpolator {

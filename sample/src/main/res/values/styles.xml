@@ -16,6 +16,7 @@
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:background">?selectableItemBackground</item>
     </style>
 
