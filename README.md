@@ -20,7 +20,7 @@ dependencies {
 ###### Android Support Library
 ```groovy
 dependencies {
-    compile 'me.relex:circleindicator:1.2.2'
+    implementation 'me.relex:circleindicator:1.2.2'
 }
 ```
 
