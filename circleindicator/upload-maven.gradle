@@ -21,7 +21,7 @@ uploadArchives {
         pom.project {
             name 'CircleIndicator'
             packaging 'aar'
-            description 'a lightweight viewpager indicator like in nexus 5 launcher'
+            description 'a lightweight indicator like in nexus 5 launcher'
             url 'https://github.com/ongakuer/CircleIndicator'
 
             licenses {
