@@ -59,6 +59,10 @@ class BaseCircleIndicator extends LinearLayout {
     private void init(Context context, AttributeSet attrs) {
         Config config = handleTypedArray(context, attrs);
         initialize(config);
+
+        if (isInEditMode()) {
+            createIndicators(3, 1);
+        }
     }
 
     private Config handleTypedArray(Context context, AttributeSet attrs) {
