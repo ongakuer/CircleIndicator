@@ -25,6 +25,7 @@ import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
 import me.relex.circleindicator.sample.fragment.SnackbarBehaviorFragment;
+import me.relex.circleindicator.sample.fragment.CustomLastItemFragment;
 
 public class SampleActivity extends AppCompatActivity {
 
@@ -73,6 +74,7 @@ public class SampleActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
 
             adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
+            adapter.add(new SampleInfo("Custom Last Item", CustomLastItemFragment.class.getName()));
             adapter.add(
                     new SampleInfo("Custom Animation", CustomAnimationFragment.class.getName()));
             adapter.add(new SampleInfo("Change Color", ChangeColorFragment.class.getName()));
