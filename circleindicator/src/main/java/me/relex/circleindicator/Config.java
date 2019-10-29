@@ -13,9 +13,9 @@ public class Config {
     @AnimatorRes int animatorResId = R.animator.scale_with_alpha;
     @AnimatorRes int animatorReverseResId = 0;
     @DrawableRes int backgroundResId = R.drawable.white_radius;
-    @DrawableRes int backgroundLastResID = R.drawable.add;
+    @DrawableRes int backgroundLastResID = R.drawable.white_radius;
     @DrawableRes int unselectedBackgroundId;
-    @DrawableRes int unselectedBackgroundLastId = R.drawable.add_unselected;
+    @DrawableRes int unselectedBackgroundLastId;
     int orientation = LinearLayout.HORIZONTAL;
     int gravity = Gravity.CENTER;
 

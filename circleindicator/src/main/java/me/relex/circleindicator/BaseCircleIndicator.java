@@ -93,6 +93,8 @@ class BaseCircleIndicator extends LinearLayout {
                         config.backgroundResId);
         config.orientation = typedArray.getInt(R.styleable.BaseCircleIndicator_ci_orientation, -1);
         config.gravity = typedArray.getInt(R.styleable.BaseCircleIndicator_ci_gravity, -1);
+        config.backgroundLastResID = typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_last, 0);
+        config.unselectedBackgroundLastId = typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_last_unselected, 0);
         typedArray.recycle();
 
         return config;
@@ -119,8 +121,8 @@ class BaseCircleIndicator extends LinearLayout {
                 (config.unselectedBackgroundId == 0) ? config.backgroundResId
                         : config.unselectedBackgroundId;
 
-        mLastIndicatorBackgroundResId = (config.backgroundLastResID == 0) ? R.drawable.add : config.backgroundLastResID;
-        mLastIndicatorUnselectedBackgroundResId = (config.unselectedBackgroundLastId == 0) ? R.drawable.add_unselected : config.unselectedBackgroundLastId;
+        mLastIndicatorBackgroundResId = (config.backgroundLastResID == 0) ? config.backgroundResId : config.backgroundLastResID;
+        mLastIndicatorUnselectedBackgroundResId = (config.unselectedBackgroundLastId == 0) ? config.backgroundResId: config.unselectedBackgroundLastId;
         setOrientation(config.orientation == VERTICAL ? VERTICAL : HORIZONTAL);
         setGravity(config.gravity >= 0 ? config.gravity : Gravity.CENTER);
     }

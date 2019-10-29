@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
+import me.relex.circleindicator.sample.fragment.CustomLastItemFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
 import me.relex.circleindicator.sample.fragment.LoopRecyclerViewFragment;
@@ -75,6 +76,7 @@ public class SampleActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
 
             adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
+            adapter.add(new SampleInfo("Custom Last Item", CustomLastItemFragment.class.getName()));
             adapter.add(
                     new SampleInfo("Custom Animation", CustomAnimationFragment.class.getName()));
             adapter.add(new SampleInfo("Change Color", ChangeColorFragment.class.getName()));
