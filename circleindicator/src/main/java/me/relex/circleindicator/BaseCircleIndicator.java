@@ -25,6 +25,9 @@ class BaseCircleIndicator extends LinearLayout {
     protected int mIndicatorBackgroundResId;
     protected int mIndicatorUnselectedBackgroundResId;
 
+    protected int mLastIndicatorBackgroundResId;
+    protected int mLastIndicatorUnselectedBackgroundResId;
+
     protected Animator mAnimatorOut;
     protected Animator mAnimatorIn;
     protected Animator mImmediateAnimatorOut;
@@ -51,7 +54,7 @@ class BaseCircleIndicator extends LinearLayout {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public BaseCircleIndicator(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                               int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -90,6 +93,8 @@ class BaseCircleIndicator extends LinearLayout {
                         config.backgroundResId);
         config.orientation = typedArray.getInt(R.styleable.BaseCircleIndicator_ci_orientation, -1);
         config.gravity = typedArray.getInt(R.styleable.BaseCircleIndicator_ci_gravity, -1);
+        config.backgroundLastResID = typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_last, 0);
+        config.unselectedBackgroundLastId = typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_last_unselected, 0);
         typedArray.recycle();
 
         return config;
@@ -115,6 +120,12 @@ class BaseCircleIndicator extends LinearLayout {
         mIndicatorUnselectedBackgroundResId =
                 (config.unselectedBackgroundId == 0) ? config.backgroundResId
                         : config.unselectedBackgroundId;
+        mLastIndicatorBackgroundResId = (config.backgroundLastResID == 0) ? config.backgroundResId : config.backgroundLastResID;
+        mLastIndicatorUnselectedBackgroundResId =
+                (config.unselectedBackgroundLastId == 0) ?
+                        (config.unselectedBackgroundId == 0) ?
+                                config.backgroundResId : config.unselectedBackgroundId :
+                        config.unselectedBackgroundLastId;
 
         setOrientation(config.orientation == VERTICAL ? VERTICAL : HORIZONTAL);
         setGravity(config.gravity >= 0 ? config.gravity : Gravity.CENTER);
@@ -182,8 +193,14 @@ class BaseCircleIndicator extends LinearLayout {
                 mImmediateAnimatorOut.setTarget(indicator);
                 mImmediateAnimatorOut.start();
                 mImmediateAnimatorOut.end();
+                if(i == count - 1 ) {
+                    indicator.setBackgroundResource(mLastIndicatorBackgroundResId);
+                }
             } else {
                 indicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+                if(i == count - 1 ) {
+                    indicator.setBackgroundResource(mLastIndicatorUnselectedBackgroundResId);
+                }
                 mImmediateAnimatorIn.setTarget(indicator);
                 mImmediateAnimatorIn.start();
                 mImmediateAnimatorIn.end();
@@ -231,6 +248,9 @@ class BaseCircleIndicator extends LinearLayout {
         View currentIndicator;
         if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
             currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+            if(currentIndicator == getChildAt(getChildCount()-1)) {
+                currentIndicator.setBackgroundResource(mLastIndicatorUnselectedBackgroundResId);
+            }
             mAnimatorIn.setTarget(currentIndicator);
             mAnimatorIn.start();
         }
@@ -238,6 +258,9 @@ class BaseCircleIndicator extends LinearLayout {
         View selectedIndicator = getChildAt(position);
         if (selectedIndicator != null) {
             selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+            if(selectedIndicator == getChildAt(getChildCount()-1)) {
+                selectedIndicator.setBackgroundResource(mLastIndicatorBackgroundResId);
+            }
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
         }

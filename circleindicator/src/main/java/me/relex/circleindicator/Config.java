@@ -13,7 +13,9 @@ public class Config {
     @AnimatorRes int animatorResId = R.animator.scale_with_alpha;
     @AnimatorRes int animatorReverseResId = 0;
     @DrawableRes int backgroundResId = R.drawable.white_radius;
+    @DrawableRes int backgroundLastResID = R.drawable.white_radius;
     @DrawableRes int unselectedBackgroundId;
+    @DrawableRes int unselectedBackgroundLastId;
     int orientation = LinearLayout.HORIZONTAL;
     int gravity = Gravity.CENTER;
 
@@ -55,6 +57,11 @@ public class Config {
 
         public Builder drawable(@DrawableRes int backgroundResId) {
             mConfig.backgroundResId = backgroundResId;
+            return this;
+        }
+
+        public Builder drawableLast(@DrawableRes int backgroundLastResId) {
+            mConfig.backgroundLastResID = backgroundLastResId;
             return this;
         }
 
