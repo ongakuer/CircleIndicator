@@ -120,9 +120,13 @@ class BaseCircleIndicator extends LinearLayout {
         mIndicatorUnselectedBackgroundResId =
                 (config.unselectedBackgroundId == 0) ? config.backgroundResId
                         : config.unselectedBackgroundId;
-
         mLastIndicatorBackgroundResId = (config.backgroundLastResID == 0) ? config.backgroundResId : config.backgroundLastResID;
-        mLastIndicatorUnselectedBackgroundResId = (config.unselectedBackgroundLastId == 0) ? config.backgroundResId: config.unselectedBackgroundLastId;
+        mLastIndicatorUnselectedBackgroundResId =
+                (config.unselectedBackgroundLastId == 0) ?
+                        (config.unselectedBackgroundId == 0) ?
+                                config.backgroundResId : config.unselectedBackgroundId :
+                        config.unselectedBackgroundLastId;
+
         setOrientation(config.orientation == VERTICAL ? VERTICAL : HORIZONTAL);
         setGravity(config.gravity >= 0 ? config.gravity : Gravity.CENTER);
     }
