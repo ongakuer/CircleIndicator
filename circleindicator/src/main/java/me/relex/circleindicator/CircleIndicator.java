@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -56,6 +58,10 @@ public class CircleIndicator extends BaseCircleIndicator {
         createIndicators(getCount(mViewpager), initialPosition(mViewpager));
     }
 
+    protected int getCurrentPosition(ViewPager viewPager, int position) {
+        return position;
+    }
+
     private final ViewPager.OnPageChangeListener mInternalPageChangeListener =
             new ViewPager.OnPageChangeListener() {
 
@@ -64,12 +70,11 @@ public class CircleIndicator extends BaseCircleIndicator {
                 }
 
                 @Override public void onPageSelected(int position) {
-
                     if (mViewpager.getAdapter() == null
                             || mViewpager.getAdapter().getCount() <= 0) {
                         return;
                     }
-                    animatePageSelected(position);
+                    animatePageSelected(getCurrentPosition(mViewpager, position));
                 }
 
                 @Override public void onPageScrollStateChanged(int state) {
