@@ -44,12 +44,16 @@ public class CircleIndicator extends BaseCircleIndicator {
         }
     }
 
-    protected int getCount() {
-        return mViewpager.getAdapter() != null ? mViewpager.getAdapter().getCount() : 0;
+    protected int getCount(ViewPager viewPager) {
+        return viewPager.getAdapter() != null ? viewPager.getAdapter().getCount() : 0;
+    }
+
+    protected int initialPosition(ViewPager viewPager) {
+        return viewPager.getCurrentItem();
     }
 
     private void createIndicators() {
-        createIndicators(getCount(), mViewpager.getCurrentItem());
+        createIndicators(getCount(mViewpager), initialPosition(mViewpager));
     }
 
     private final ViewPager.OnPageChangeListener mInternalPageChangeListener =
