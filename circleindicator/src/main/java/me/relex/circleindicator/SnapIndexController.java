@@ -1,6 +1,6 @@
 package me.relex.circleindicator;
 
-interface SnapIndexController {
+public interface SnapIndexController {
     int getSnappedIndex();
     int getTotalIndicatorCount();
 }
