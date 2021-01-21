@@ -7,7 +7,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@id/indicator"
@@ -17,5 +17,22 @@
         android:layout_marginBottom="48dp"
         app:ci_animator="@animator/indicator_no_animator"
         app:ci_drawable="@drawable/white_radius"
-        app:ci_drawable_unselected="@drawable/black_radius"/>
+        app:ci_drawable_unselected="@drawable/black_radius" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/change_drawable_view"
+        style="@style/DefaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_drawable" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@id/tint_view"
+        style="@style/DefaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/tint" />
+
 </FrameLayout>

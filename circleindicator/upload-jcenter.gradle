@@ -1,39 +1,5 @@
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-
 group = "me.relex"
-
-install {
-    repositories.mavenInstaller {
-        pom.project {
-            name 'CircleIndicator'
-            packaging 'aar'
-            description 'a lightweight indicator like in nexus 5 launcher'
-            url 'https://github.com/ongakuer/CircleIndicator'
-
-            licenses {
-                license {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                }
-            }
-
-            developers {
-                developer {
-                    id 'relex'
-                    name 'relex'
-                    email 'wwwliangxin@gmail.com'
-                }
-            }
-
-            scm {
-                url 'https://github.com/ongakuer/CircleIndicator'
-                connection 'https://github.com/ongakuer/CircleIndicator.git'
-                developerConnection 'https://github.com/ongakuer/CircleIndicator.git'
-            }
-        }
-    }
-}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

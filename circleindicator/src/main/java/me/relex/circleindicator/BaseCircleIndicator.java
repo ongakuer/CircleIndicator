@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -12,7 +14,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.view.ViewCompat;
 
 class BaseCircleIndicator extends LinearLayout {
 
@@ -24,6 +31,9 @@ class BaseCircleIndicator extends LinearLayout {
 
     protected int mIndicatorBackgroundResId;
     protected int mIndicatorUnselectedBackgroundResId;
+
+    protected ColorStateList mIndicatorTintColor;
+    protected ColorStateList mIndicatorTintUnselectedColor;
 
     protected Animator mAnimatorOut;
     protected Animator mAnimatorIn;
@@ -118,6 +128,28 @@ class BaseCircleIndicator extends LinearLayout {
 
         setOrientation(config.orientation == VERTICAL ? VERTICAL : HORIZONTAL);
         setGravity(config.gravity >= 0 ? config.gravity : Gravity.CENTER);
+    }
+
+    public void tintIndicator(@ColorInt int indicatorColor) {
+        tintIndicator(indicatorColor, indicatorColor);
+    }
+
+    public void tintIndicator(@ColorInt int indicatorColor,
+            @ColorInt int unselectedIndicatorColor) {
+        mIndicatorTintColor = ColorStateList.valueOf(indicatorColor);
+        mIndicatorTintUnselectedColor = ColorStateList.valueOf(unselectedIndicatorColor);
+        changeIndicatorBackground();
+    }
+
+    public void changeIndicatorResource(@DrawableRes int indicatorResId) {
+        changeIndicatorResource(indicatorResId, indicatorResId);
+    }
+
+    public void changeIndicatorResource(@DrawableRes int indicatorResId,
+            @DrawableRes int indicatorUnselectedResId) {
+        mIndicatorBackgroundResId = indicatorResId;
+        mIndicatorUnselectedBackgroundResId = indicatorUnselectedResId;
+        changeIndicatorBackground();
     }
 
     public interface IndicatorCreatedListener {
@@ -230,21 +262,69 @@ class BaseCircleIndicator extends LinearLayout {
 
         View currentIndicator;
         if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
-            currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+            if (mIndicatorTintUnselectedColor != null) {
+                Drawable indicatorDrawable = DrawableCompat.wrap(
+                        ContextCompat.getDrawable(getContext(), mIndicatorUnselectedBackgroundResId)
+                                .mutate());
+                DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintUnselectedColor);
+                ViewCompat.setBackground(currentIndicator, indicatorDrawable);
+            } else {
+                currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+            }
             mAnimatorIn.setTarget(currentIndicator);
             mAnimatorIn.start();
         }
 
         View selectedIndicator = getChildAt(position);
         if (selectedIndicator != null) {
-            selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+            if (mIndicatorTintColor != null) {
+                Drawable indicatorDrawable = DrawableCompat.wrap(
+                        ContextCompat.getDrawable(getContext(), mIndicatorBackgroundResId)
+                                .mutate());
+                DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintColor);
+                ViewCompat.setBackground(selectedIndicator, indicatorDrawable);
+            } else {
+                selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+            }
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
         }
         mLastPosition = position;
     }
 
-    protected class ReverseInterpolator implements Interpolator {
+    protected void changeIndicatorBackground() {
+        int count = getChildCount();
+        if (count <= 0) {
+            return;
+        }
+        View currentIndicator;
+        for (int i = 0; i < count; i++) {
+            currentIndicator = getChildAt(i);
+            if (i == mLastPosition) {
+                if (mIndicatorTintColor != null) {
+                    Drawable indicatorDrawable = DrawableCompat.wrap(
+                            ContextCompat.getDrawable(getContext(), mIndicatorBackgroundResId)
+                                    .mutate());
+                    DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintColor);
+                    ViewCompat.setBackground(currentIndicator, indicatorDrawable);
+                } else {
+                    currentIndicator.setBackgroundResource(mIndicatorBackgroundResId);
+                }
+            } else {
+                if (mIndicatorTintUnselectedColor != null) {
+                    Drawable indicatorDrawable = DrawableCompat.wrap(
+                            ContextCompat.getDrawable(getContext(),
+                                    mIndicatorUnselectedBackgroundResId).mutate());
+                    DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintUnselectedColor);
+                    ViewCompat.setBackground(currentIndicator, indicatorDrawable);
+                } else {
+                    currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+                }
+            }
+        }
+    }
+
+    protected static class ReverseInterpolator implements Interpolator {
         @Override public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
         }

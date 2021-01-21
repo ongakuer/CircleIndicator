@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-import me.relex.circleindicator.sample.fragment.ChangeColorFragment;
+import me.relex.circleindicator.sample.fragment.ChangeDrawableFragment;
 import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
@@ -77,7 +77,7 @@ public class SampleActivity extends AppCompatActivity {
             adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
             adapter.add(
                     new SampleInfo("Custom Animation", CustomAnimationFragment.class.getName()));
-            adapter.add(new SampleInfo("Change Color", ChangeColorFragment.class.getName()));
+            adapter.add(new SampleInfo("Change Drawable", ChangeDrawableFragment.class.getName()));
             adapter.add(new SampleInfo("Dynamic Adapter", DynamicAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("Reset Adapter", ResetAdapterFragment.class.getName()));
             adapter.add(new SampleInfo("LoopViewPager", LoopViewPagerFragment.class.getName()));

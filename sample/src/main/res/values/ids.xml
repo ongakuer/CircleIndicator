@@ -13,5 +13,7 @@
     <item type="id" name="add"/>
     <item type="id" name="remove"/>
     <item type="id" name="button"/>
+    <item type="id" name="tint_view"/>
+    <item type="id" name="change_drawable_view"/>
 
 </resources>

@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
-version = "2.1.4"
+version = "2.1.5"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 214
+        targetSdkVersion 29
+        versionCode 215
         versionName version
     }
 
@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core:1.3.2'
     implementation 'androidx.annotation:annotation:1.1.0'
     compileOnly 'androidx.viewpager:viewpager:1.0.0'
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
