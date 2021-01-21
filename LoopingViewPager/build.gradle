@@ -23,5 +23,5 @@ android {
 
 dependencies {
     implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'androidx.fragment:fragment:1.0.0'
+    implementation 'androidx.fragment:fragment:1.2.5'
 }
