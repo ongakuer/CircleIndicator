@@ -210,12 +210,15 @@ class BaseCircleIndicator extends LinearLayout {
         for (int i = 0; i < count; i++) {
             indicator = getChildAt(i);
             if (currentPosition == i) {
-                indicator.setBackgroundResource(mIndicatorBackgroundResId);
+                bindIndicatorBackground(indicator, mIndicatorBackgroundResId, mIndicatorTintColor);
                 mImmediateAnimatorOut.setTarget(indicator);
                 mImmediateAnimatorOut.start();
                 mImmediateAnimatorOut.end();
             } else {
-                indicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
+
+                bindIndicatorBackground(indicator, mIndicatorUnselectedBackgroundResId,
+                        mIndicatorTintUnselectedColor);
+
                 mImmediateAnimatorIn.setTarget(indicator);
                 mImmediateAnimatorIn.start();
                 mImmediateAnimatorIn.end();
@@ -262,30 +265,17 @@ class BaseCircleIndicator extends LinearLayout {
 
         View currentIndicator;
         if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
-            if (mIndicatorTintUnselectedColor != null) {
-                Drawable indicatorDrawable = DrawableCompat.wrap(
-                        ContextCompat.getDrawable(getContext(), mIndicatorUnselectedBackgroundResId)
-                                .mutate());
-                DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintUnselectedColor);
-                ViewCompat.setBackground(currentIndicator, indicatorDrawable);
-            } else {
-                currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
-            }
+            bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
+                    mIndicatorTintUnselectedColor);
             mAnimatorIn.setTarget(currentIndicator);
             mAnimatorIn.start();
         }
 
         View selectedIndicator = getChildAt(position);
         if (selectedIndicator != null) {
-            if (mIndicatorTintColor != null) {
-                Drawable indicatorDrawable = DrawableCompat.wrap(
-                        ContextCompat.getDrawable(getContext(), mIndicatorBackgroundResId)
-                                .mutate());
-                DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintColor);
-                ViewCompat.setBackground(selectedIndicator, indicatorDrawable);
-            } else {
-                selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-            }
+            bindIndicatorBackground(selectedIndicator, mIndicatorBackgroundResId,
+                    mIndicatorTintColor);
+
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
         }
@@ -301,26 +291,24 @@ class BaseCircleIndicator extends LinearLayout {
         for (int i = 0; i < count; i++) {
             currentIndicator = getChildAt(i);
             if (i == mLastPosition) {
-                if (mIndicatorTintColor != null) {
-                    Drawable indicatorDrawable = DrawableCompat.wrap(
-                            ContextCompat.getDrawable(getContext(), mIndicatorBackgroundResId)
-                                    .mutate());
-                    DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintColor);
-                    ViewCompat.setBackground(currentIndicator, indicatorDrawable);
-                } else {
-                    currentIndicator.setBackgroundResource(mIndicatorBackgroundResId);
-                }
+                bindIndicatorBackground(currentIndicator, mIndicatorBackgroundResId,
+                        mIndicatorTintColor);
             } else {
-                if (mIndicatorTintUnselectedColor != null) {
-                    Drawable indicatorDrawable = DrawableCompat.wrap(
-                            ContextCompat.getDrawable(getContext(),
-                                    mIndicatorUnselectedBackgroundResId).mutate());
-                    DrawableCompat.setTintList(indicatorDrawable, mIndicatorTintUnselectedColor);
-                    ViewCompat.setBackground(currentIndicator, indicatorDrawable);
-                } else {
-                    currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
-                }
+                bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
+                        mIndicatorTintUnselectedColor);
             }
+        }
+    }
+
+    private void bindIndicatorBackground(View view, @DrawableRes int drawableRes,
+            @Nullable ColorStateList tintColor) {
+        if (tintColor != null) {
+            Drawable indicatorDrawable = DrawableCompat.wrap(
+                    ContextCompat.getDrawable(getContext(), drawableRes).mutate());
+            DrawableCompat.setTintList(indicatorDrawable, tintColor);
+            ViewCompat.setBackground(view, indicatorDrawable);
+        } else {
+            view.setBackgroundResource(drawableRes);
         }
     }
 

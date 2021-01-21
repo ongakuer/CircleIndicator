@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version = "2.1.5"
+version = "2.1.6"
 
 android {
     compileSdkVersion 29
@@ -8,7 +8,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 215
+        versionCode 216
         versionName version
     }
 
