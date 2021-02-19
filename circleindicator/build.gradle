@@ -33,5 +33,4 @@ dependencies {
     compileOnly 'androidx.viewpager2:viewpager2:1.0.0'
 }
 
-//apply from: "upload-jcenter.gradle"
-//apply from: "upload-maven.gradle"
+//apply from: "upload-maven-plugin.gradle"

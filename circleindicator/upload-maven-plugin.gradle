@@ -1,0 +1,159 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+ext {
+    PUBLISH_DEVELOPER = "Relex"
+    PUBLISH_NAME = "CircleIndicator"
+    PUBLISH_DESCRIPTION = "A lightweight indicator"
+    PUBLISH_URL = "https://github.com/ongakuer/CircleIndicator"
+    PUBLISH_GIT_URL = "https://github.com/ongakuer/CircleIndicator.git"
+    PUBLISH_GROUP_ID = "me.relex"
+    PUBLISH_ARTIFACT_ID = "circleIndicator"
+    PUBLISH_VERSION = android.defaultConfig.versionName
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            if (variant.hasProperty('javaCompileProvider')) {
+                owner.classpath += variant.javaCompileProvider.get().classpath
+            } else {
+                owner.classpath += variant.javaCompiler.classpath
+            }
+        }
+    }
+    options {
+        encoding 'utf-8'
+        charSet 'utf-8'
+    }
+    exclude '**/R.html', '**/R.*.html', '**/index.html', '**/*.kt'
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+project.artifacts {
+    archives androidJavadocsJar, androidSourcesJar
+}
+
+afterEvaluate {
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId project.ext.PUBLISH_GROUP_ID
+                artifactId project.ext.PUBLISH_ARTIFACT_ID
+                version project.ext.PUBLISH_VERSION
+
+                artifact bundleReleaseAar
+                artifact androidJavadocsJar
+                artifact androidSourcesJar
+
+                pom {
+                    name = project.ext.PUBLISH_NAME
+                    description = project.ext.PUBLISH_DESCRIPTION
+                    url = project.ext.PUBLISH_URL
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            name = project.ext.PUBLISH_DEVELOPER
+                        }
+                    }
+                    scm {
+                        connection = "scm:git:${project.ext.PUBLISH_GIT_URL}"
+                        url = project.ext.PUBLISH_URL
+                    }
+                }
+
+                pom.withXml {
+                    final dependenciesNode = asNode().appendNode('dependencies')
+                    // Dependency
+                    ext.addDependency = { Dependency dep, String scope ->
+                        if (dep.group == null ||
+                                dep.version ==
+                                null ||
+                                dep.name ==
+                                null ||
+                                dep.name ==
+                                "unspecified") {
+                            return
+                        }
+
+                        final dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('artifactId', dep.name)
+
+                        if (dep.version == 'unspecified') {
+                            return
+                        } else {
+                            dependencyNode.appendNode('groupId', dep.group)
+                            dependencyNode.appendNode('version', dep.version)
+                            System.println("${dep.group} ${dep.name} ${dep.version}")
+                        }
+
+                        dependencyNode.appendNode('scope', scope)
+                        def artifactsList = dep.properties['artifacts']
+                        if (artifactsList != null && artifactsList.size() > 0) {
+                            final artifact = artifactsList[0]
+                            dependencyNode.appendNode('type', artifact.getType())
+                        }
+
+                        if (!dep.transitive) {
+                            final exclusionNode = dependencyNode.
+                                    appendNode('exclusions').
+                                    appendNode('exclusion')
+                            exclusionNode.appendNode('groupId', '*')
+                            exclusionNode.appendNode('artifactId', '*')
+                        } else if (!dep.properties.excludeRules.empty) {
+                            final exclusions = dependencyNode.appendNode('exclusions')
+                            dep.properties.excludeRules.each { ExcludeRule rule ->
+                                final exclusionNode = exclusions.appendNode('exclusion')
+                                exclusionNode.appendNode('groupId', rule.group ?: '*')
+                                exclusionNode.appendNode('artifactId', rule.module ?: '*')
+                            }
+                        }
+                    }
+                    configurations.
+                            api.
+                            getDependencies().
+                            each { dep -> addDependency(dep, "compile") }
+                    configurations.
+                            implementation.
+                            getDependencies().
+                            each { dep -> addDependency(dep, "runtime") }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                url "$sonatypeRepo"
+                credentials {
+                    username "$sonatypeUsername"
+                    password "$sonatypePassword"
+                }
+            }
+        }
+    }
+
+    signing {
+        sign publishing.publications.maven
+    }
+}
+
+//task cleanBuildPublish(type: GradleBuild) {
+//    tasks = ['clean', 'build', 'publish']
+//}
