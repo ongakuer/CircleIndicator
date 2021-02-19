@@ -8,7 +8,7 @@ ext {
     PUBLISH_URL = "https://github.com/ongakuer/CircleIndicator"
     PUBLISH_GIT_URL = "https://github.com/ongakuer/CircleIndicator.git"
     PUBLISH_GROUP_ID = "me.relex"
-    PUBLISH_ARTIFACT_ID = "circleIndicator"
+    PUBLISH_ARTIFACT_ID = "circleindicator"
     PUBLISH_VERSION = android.defaultConfig.versionName
 }
 

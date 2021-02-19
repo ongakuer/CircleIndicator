@@ -4,6 +4,7 @@ A lightweight indicator like in nexus 5 launcher
 
 [ ![Download](https://api.bintray.com/packages/ongakuer/maven/CircleIndicator/images/download.svg) ](https://bintray.com/ongakuer/maven/CircleIndicator/_latestVersion)
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/me.relex/circleindicator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/me.relex/circleindicator)
 
 <img src="/screenshot.gif" width="300">
 
