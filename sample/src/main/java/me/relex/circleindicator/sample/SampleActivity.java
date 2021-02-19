@@ -21,6 +21,7 @@ import me.relex.circleindicator.sample.fragment.CustomAnimationFragment;
 import me.relex.circleindicator.sample.fragment.DefaultFragment;
 import me.relex.circleindicator.sample.fragment.DynamicAdapterFragment;
 import me.relex.circleindicator.sample.fragment.LoopRecyclerViewFragment;
+import me.relex.circleindicator.sample.fragment.LoopViewPager2Fragment;
 import me.relex.circleindicator.sample.fragment.LoopViewPagerFragment;
 import me.relex.circleindicator.sample.fragment.RecyclerViewFragment;
 import me.relex.circleindicator.sample.fragment.ResetAdapterFragment;
@@ -89,6 +90,8 @@ public class SampleActivity extends AppCompatActivity {
                     LoopRecyclerViewFragment.class.getName()));
             adapter.add(new SampleInfo("AndroidX ViewPager2 (CircleIndicator3)",
                     ViewPager2Fragment.class.getName()));
+            adapter.add(new SampleInfo("AndroidX LoopViewPager2 (CircleIndicator3)",
+                LoopViewPager2Fragment.class.getName()));
         }
 
         private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
