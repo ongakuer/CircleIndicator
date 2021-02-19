@@ -4,7 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.SnapHelper;
  */
 public class CircleIndicator2 extends BaseCircleIndicator {
 
-    private RecyclerView mRecyclerView;
-    private SnapHelper mSnapHelper;
+    private SnapIndexController mSnapIndexController;
 
     public CircleIndicator2(Context context) {
         super(context);
@@ -37,9 +36,16 @@ public class CircleIndicator2 extends BaseCircleIndicator {
     }
 
     public void attachToRecyclerView(@NonNull RecyclerView recyclerView,
-            @NonNull SnapHelper snapHelper) {
-        mRecyclerView = recyclerView;
-        mSnapHelper = snapHelper;
+            @NonNull SnapIndexController snapIndexController) {
+        mSnapIndexController = snapIndexController;
+        mLastPosition = -1;
+        createIndicators();
+        recyclerView.removeOnScrollListener(mInternalOnScrollListener);
+        recyclerView.addOnScrollListener(mInternalOnScrollListener);
+    }
+
+    public void attachToRecyclerView(@NonNull RecyclerView recyclerView, @NonNull SnapHelper snapHelper) {
+        mSnapIndexController = new SimpleSnapIndexController(recyclerView, snapHelper);
         mLastPosition = -1;
         createIndicators();
         recyclerView.removeOnScrollListener(mInternalOnScrollListener);
@@ -47,25 +53,7 @@ public class CircleIndicator2 extends BaseCircleIndicator {
     }
 
     private void createIndicators() {
-        RecyclerView.Adapter adapter = mRecyclerView.getAdapter();
-        int count;
-        if (adapter == null) {
-            count = 0;
-        } else {
-            count = adapter.getItemCount();
-        }
-        createIndicators(count, getSnapPosition(mRecyclerView.getLayoutManager()));
-    }
-
-    public int getSnapPosition(@Nullable RecyclerView.LayoutManager layoutManager) {
-        if (layoutManager == null) {
-            return RecyclerView.NO_POSITION;
-        }
-        View snapView = mSnapHelper.findSnapView(layoutManager);
-        if (snapView == null) {
-            return RecyclerView.NO_POSITION;
-        }
-        return layoutManager.getPosition(snapView);
+        createIndicators(mSnapIndexController.getTotalIndicatorCount(), mSnapIndexController.getSnappedIndex());
     }
 
     private final RecyclerView.OnScrollListener mInternalOnScrollListener =
@@ -74,7 +62,7 @@ public class CircleIndicator2 extends BaseCircleIndicator {
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
 
-                    int position = getSnapPosition(recyclerView.getLayoutManager());
+                    int position = mSnapIndexController.getSnappedIndex();
                     if (position == RecyclerView.NO_POSITION) {
                         return;
                     }
@@ -86,17 +74,13 @@ public class CircleIndicator2 extends BaseCircleIndicator {
             new RecyclerView.AdapterDataObserver() {
                 @Override public void onChanged() {
                     super.onChanged();
-                    if (mRecyclerView == null) {
-                        return;
-                    }
-                    RecyclerView.Adapter adapter = mRecyclerView.getAdapter();
-                    int newCount = adapter != null ? adapter.getItemCount() : 0;
+                    int newCount = mSnapIndexController.getTotalIndicatorCount();
                     int currentCount = getChildCount();
                     if (newCount == currentCount) {
                         // No change
                         return;
                     } else if (mLastPosition < newCount) {
-                        mLastPosition = getSnapPosition(mRecyclerView.getLayoutManager());
+                        mLastPosition = mSnapIndexController.getSnappedIndex();
                     } else {
                         mLastPosition = RecyclerView.NO_POSITION;
                     }
