@@ -9,10 +9,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.4.2'
         //        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         //        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.28.3"
     }
 }
 
 allprojects {
+    apply plugin: "com.jfrog.artifactory"
+    apply plugin: "maven-publish"
     repositories {
         google()
         jcenter()
