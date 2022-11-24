@@ -3,11 +3,11 @@ apply plugin: 'com.android.library'
 version = "2.1.3"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode 122
         versionName version
     }
@@ -21,9 +21,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-annotations:28.0.0'
-    compile 'com.android.support:support-core-ui:28.0.0'
-    provided 'com.android.support:design:28.0.0'
+    implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'androidx.legacy:legacy-support-core-ui:1.0.0'
+    implementation 'com.google.android.material:material:1.2.1'
 }
 
 //apply from: "upload-jcenter.gradle"
