@@ -3,9 +3,18 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CircleIndicator.iml" filepath="$PROJECT_DIR$/CircleIndicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LoopingViewPager/LoopingViewPager.iml" filepath="$PROJECT_DIR$/LoopingViewPager/LoopingViewPager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/circleindicator/circleindicator.iml" filepath="$PROJECT_DIR$/circleindicator/circleindicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.iml" filepath="$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/LoopingViewPager/CircleIndicator.LoopingViewPager.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/circleindicator/CircleIndicator.circleindicator.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/CircleIndicator.sample.unitTest.iml" />
     </modules>
   </component>
 </project>
